@@ -26,6 +26,7 @@ package com.athena.dolly.controller.web.user;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -39,14 +40,17 @@ import com.athena.dolly.controller.web.common.model.SimpleJsonResponse;
  * <pre>
  * 사용자 관리 컨트롤러.
  * </pre>
+ * 
  * @author Bong-Jin Kwon
  * @version 1.0
  */
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
-	
+
+	@Autowired
+	private UserService service;
+
 	/**
 	 * <pre>
 	 * 
@@ -55,65 +59,72 @@ public class UserController {
 	public UserController() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	@RequestMapping("/onAfterLogout")
 	@ResponseBody
-	public SimpleJsonResponse logout(SimpleJsonResponse jsonRes, HttpSession session){
-		
+	public SimpleJsonResponse logout(SimpleJsonResponse jsonRes,
+			HttpSession session) {
+
 		session.invalidate();
-		
+
 		jsonRes.setMsg("로그아웃 되었습니다.");
-		
+
 		return jsonRes;
 	}
-	
+
 	@RequestMapping("/onAfterLogin")
 	@ResponseBody
-	public SimpleJsonResponse onAfterLogin(SimpleJsonResponse jsonRes){
-		
-		
-		jsonRes.setData(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-		
+	public SimpleJsonResponse onAfterLogin(SimpleJsonResponse jsonRes) {
+
+		jsonRes.setData(SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal());
+
 		/*
-		if(userDetails != null){
-			service.updateLastLogon(userDetails.getUserId());
-		}
-		*/
+		 * if(userDetails != null){
+		 * service.updateLastLogon(userDetails.getUserId()); }
+		 */
 		return jsonRes;
 	}
-	
-	@ResponseStatus(value=HttpStatus.FORBIDDEN)
+
+	@ResponseStatus(value = HttpStatus.FORBIDDEN)
 	@RequestMapping("/notLogin")
 	@ResponseBody
-	public SimpleJsonResponse notLogin(SimpleJsonResponse jsonRes){
-		
+	public SimpleJsonResponse notLogin(SimpleJsonResponse jsonRes) {
+
 		jsonRes.setSuccess(false);
 		jsonRes.setMsg("로그인 정보가 없습니다. 관리자에게 문의하세요.");
 		jsonRes.setData("notLogin");
-		
+
 		return jsonRes;
 	}
-	
-	@ResponseStatus(value=HttpStatus.FORBIDDEN)
+
+	@ResponseStatus(value = HttpStatus.FORBIDDEN)
 	@RequestMapping("/accessDenied")
 	@ResponseBody
-	public SimpleJsonResponse accessDenied(SimpleJsonResponse jsonRes){
-		
+	public SimpleJsonResponse accessDenied(SimpleJsonResponse jsonRes) {
+
 		jsonRes.setSuccess(false);
 		jsonRes.setMsg("해당 작업에 대한 권한이 없습니다. 관리자에게 문의하세요.");
-		
+
 		return jsonRes;
 	}
-	
+
 	@RequestMapping("/loginFail")
-	public @ResponseBody SimpleJsonResponse loginFail(SimpleJsonResponse jsonRes){
-		
+	public @ResponseBody
+	SimpleJsonResponse loginFail(SimpleJsonResponse jsonRes) {
+
 		jsonRes.setSuccess(false);
 		jsonRes.setMsg("login ID 또는 password 가 잘못되었습니다.");
-		
+
+		return jsonRes;
+	}
+
+	@RequestMapping("/list")
+	public @ResponseBody
+	SimpleJsonResponse getList(SimpleJsonResponse jsonRes) {
+		jsonRes.setData(service.getList());
 		return jsonRes;
 	}
 
 }
-//end of UserController.java
+// end of UserController.java
