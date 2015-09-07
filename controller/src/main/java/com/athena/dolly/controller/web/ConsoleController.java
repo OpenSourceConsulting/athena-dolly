@@ -66,8 +66,8 @@ public class ConsoleController {
 
     private static final Logger logger = LoggerFactory.getLogger(ConsoleController.class);
     
-    @Value("${infinispan.jmx.server.list}")
-    private String testProperty;
+   // @Value("${infinispan.jmx.server.list}")
+    //private String testProperty;
 
     @RequestMapping(value="/getServerList", method=RequestMethod.GET)
     @ResponseBody
