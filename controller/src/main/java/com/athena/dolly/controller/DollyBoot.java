@@ -30,6 +30,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,8 +47,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  *
  */
 @EnableAutoConfiguration
-@ComponentScan(basePackages={"com.athena.dolly.controller"})
+@ComponentScan(basePackages={"com.athena.dolly"})
 //@PropertySource(value={"classpath:dolly.properties","classpath:dolly-${spring.profiles.active:local}.properties"})
+@PropertySource(value={"classpath:application.properties"})
 public class DollyBoot extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
