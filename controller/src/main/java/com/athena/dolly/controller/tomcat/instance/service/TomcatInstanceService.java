@@ -38,7 +38,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.athena.dolly.controller.DollyConstants;
-import com.athena.dolly.controller.ssh.SSHManager;
+import com.athena.dolly.controller.common.SSHManager;
 import com.athena.dolly.controller.tomcat.instance.domain.ConfigFileVersion;
 import com.athena.dolly.controller.tomcat.instance.domain.ConfigFileVersionRepository;
 import com.athena.dolly.controller.tomcat.instance.domain.QConfigFileVersion;

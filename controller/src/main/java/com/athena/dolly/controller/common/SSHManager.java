@@ -22,7 +22,7 @@
  * ---------------	----------------	------------
  * Bong-Jin Kwon	2015. 1. 19.		First Draft.
  */
-package com.athena.dolly.controller.ssh;
+package com.athena.dolly.controller.common;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

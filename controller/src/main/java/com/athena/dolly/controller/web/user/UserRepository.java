@@ -5,10 +5,13 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+@Repository
 public class UserRepository implements IUserRepository {
 
 	@Override
@@ -36,4 +39,5 @@ public class UserRepository implements IUserRepository {
 
 		return users;
 	}
+
 }

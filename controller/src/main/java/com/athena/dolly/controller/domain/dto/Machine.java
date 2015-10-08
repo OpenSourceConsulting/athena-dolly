@@ -1,4 +1,4 @@
-package com.athena.dolly.controller.machine.domain;
+package com.athena.dolly.controller.domain.dto;
 
 import java.io.Serializable;
 import java.util.Date;

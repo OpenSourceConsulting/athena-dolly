@@ -8,5 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface IUserRepository {
 	boolean insert(UserDto user);
+
 	List<UserDto> getList();
 }

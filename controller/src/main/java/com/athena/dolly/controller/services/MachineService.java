@@ -1,17 +1,17 @@
-package com.athena.dolly.controller.machine.service;
+package com.athena.dolly.controller.services;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.athena.dolly.controller.machine.domain.IMachineRepository;
-import com.athena.dolly.controller.machine.domain.Machine;
+import com.athena.dolly.controller.domain.dto.Machine;
+import com.athena.dolly.controller.domain.repositories.MachineRepository;
 
 @Service
 public class MachineService implements InitializingBean {
 
 	@Autowired
-	private IMachineRepository repo;
+	private MachineRepository repo;
 
 	public MachineService() {
 

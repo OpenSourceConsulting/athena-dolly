@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.athena.dolly.controller.ssh.SSHManager;
+import com.athena.dolly.controller.common.SSHManager;
 import com.athena.dolly.controller.tomcat.instance.domain.TomcatInstance;
 import com.athena.dolly.controller.tomcat.instance.service.TomcatInstanceService;
 import com.athena.dolly.controller.web.common.model.ExtjsGridParam;
