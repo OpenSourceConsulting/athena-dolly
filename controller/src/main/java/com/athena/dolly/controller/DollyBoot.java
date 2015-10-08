@@ -47,9 +47,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  *
  */
 @EnableAutoConfiguration
-@ComponentScan(basePackages={"com.athena.dolly"})
+@ComponentScan(basePackages={"com.athena.dolly.controller"})
 //@PropertySource(value={"classpath:dolly.properties","classpath:dolly-${spring.profiles.active:local}.properties"})
-@PropertySource(value={"classpath:application.properties"})
+@PropertySource(value={"classpath:db.properties"})
 public class DollyBoot extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
