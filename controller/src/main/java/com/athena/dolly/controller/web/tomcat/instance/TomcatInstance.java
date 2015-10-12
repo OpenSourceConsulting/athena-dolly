@@ -22,7 +22,7 @@
  * ---------------	----------------	------------
  * Bong-Jin Kwon	2015. 1. 9.		First Draft.
  */
-package com.athena.dolly.controller.tomcat.instance.domain;
+package com.athena.dolly.controller.web.tomcat.instance;
 
 import java.util.List;
 

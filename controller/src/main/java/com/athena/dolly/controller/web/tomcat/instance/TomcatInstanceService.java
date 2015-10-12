@@ -22,7 +22,7 @@
  * ---------------	----------------	------------
  * Bong-Jin Kwon	2015. 1. 9.		First Draft.
  */
-package com.athena.dolly.controller.tomcat.instance.service;
+package com.athena.dolly.controller.web.tomcat.instance;
 
 import java.io.UnsupportedEncodingException;
 
@@ -42,8 +42,6 @@ import com.athena.dolly.controller.common.SSHManager;
 import com.athena.dolly.controller.tomcat.instance.domain.ConfigFileVersion;
 import com.athena.dolly.controller.tomcat.instance.domain.ConfigFileVersionRepository;
 import com.athena.dolly.controller.tomcat.instance.domain.QConfigFileVersion;
-import com.athena.dolly.controller.tomcat.instance.domain.TomcatInstance;
-import com.athena.dolly.controller.tomcat.instance.domain.TomcatInstanceRepository;
 import com.mysema.query.jpa.impl.JPAQuery;
 
 /**

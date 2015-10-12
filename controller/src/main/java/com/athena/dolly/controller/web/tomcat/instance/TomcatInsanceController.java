@@ -22,7 +22,7 @@
  * ---------------	----------------	------------
  * Bong-Jin Kwon	2015. 1. 9.		First Draft.
  */
-package com.athena.dolly.controller.tomcat.instance.web;
+package com.athena.dolly.controller.web.tomcat.instance;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,8 +33,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.athena.dolly.controller.common.SSHManager;
-import com.athena.dolly.controller.tomcat.instance.domain.TomcatInstance;
-import com.athena.dolly.controller.tomcat.instance.service.TomcatInstanceService;
 import com.athena.dolly.controller.web.common.model.ExtjsGridParam;
 import com.athena.dolly.controller.web.common.model.GridJsonResponse;
 import com.athena.dolly.controller.web.common.model.SimpleJsonResponse;

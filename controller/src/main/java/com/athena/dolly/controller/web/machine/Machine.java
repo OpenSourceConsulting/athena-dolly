@@ -1,6 +1,7 @@
-package com.athena.dolly.controller.domain.dto;
+package com.athena.dolly.controller.web.machine;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,8 +19,12 @@ import javax.persistence.Table;
  * @author Tran Ho
  */
 @Entity
-@Table(name="machine")
+@Table(name = "machine")
 public class Machine implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "Id")
 	private int Id;
@@ -68,8 +74,16 @@ public class Machine implements Serializable {
 	private boolean is_vm;
 	@Column(name = "jvm")
 	private String jvm_version;
-
 	private int state;
+
+	@OneToMany
+	private Collection<Disk> disks;
+
+	@OneToMany
+	private Collection<Memory> memories;
+
+	@OneToMany
+	private Collection<NetworkInterface> network_interfaces;
 
 	public String getName() {
 		return name;
@@ -254,4 +268,72 @@ public class Machine implements Serializable {
 	public void setState(int state) {
 		this.state = state;
 	}
+
+	/**
+	 * Constructor
+	 */
+	public Machine(String mHostName, String mip4_addr, String mSSHUserName,
+			String mSSHPassword) {
+		host_name = mHostName;
+		ipv4 = mip4_addr;
+		ssh_username = mSSHUserName;
+		ssh_password = mSSHPassword;
+	}
+
+	public Machine() {
+	}
+
+	public Collection<Disk> getDisks() {
+		return disks;
+	}
+
+	public void setDisks(Collection<Disk> disks) {
+		this.disks = disks;
+	}
+
+	// memory
+	public boolean addMemory(Memory m) {
+		if (memories != null) {
+			return memories.add(m);
+		}
+		return false;
+	}
+
+	public boolean removeMemory(Memory m) {
+		if (memories != null) {
+			return memories.remove(m);
+		}
+		return false;
+	}
+
+	// network interfaces
+	public boolean addNetworkInterface(NetworkInterface ni) {
+		if (network_interfaces != null) {
+			return network_interfaces.add(ni);
+		}
+		return false;
+	}
+
+	public boolean removeNetworkInterface(NetworkInterface ni) {
+		if (network_interfaces != null) {
+			return network_interfaces.remove(ni);
+		}
+		return false;
+	}
+
+	// network interfaces
+	public boolean addDisk(Disk d) {
+		if (disks != null) {
+			return disks.add(d);
+		}
+		return false;
+	}
+
+	public boolean removeDisk(Disk d) {
+		if (disks != null) {
+			return disks.remove(d);
+		}
+		return false;
+	}
+
 }
