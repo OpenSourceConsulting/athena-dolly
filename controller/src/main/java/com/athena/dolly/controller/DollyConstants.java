@@ -26,35 +26,35 @@ package com.athena.dolly.controller;
 
 /**
  * <pre>
- *
+ * 
  * </pre>
+ * 
  * @author Bong-Jin Kwon
  * @version 2.0
  */
 public abstract class DollyConstants {
 
 	/**
-	 * env.sh 로딩완료
-	 * - 11 은 에러발생
+	 * env.sh 로딩완료 - 11 은 에러발생
 	 */
 	public static final int INSTANCE_STATE_PEND1 = 10;
-	
+
 	/**
-	 * server.xml 로딩완료
-	 * - 21 은 에러발생
+	 * server.xml 로딩완료 - 21 은 에러발생
 	 */
 	public static final int INSTANCE_STATE_PEND2 = 20;
-	
+
 	/**
-	 * context.xml 로딩완료
-	 * - 31 은 에러발생
+	 * context.xml 로딩완료 - 31 은 에러발생
 	 */
 	public static final int INSTANCE_STATE_PEND3 = 30;
-	
+
 	/**
 	 * 설치가 유효한 상태
 	 */
 	public static final int INSTANCE_STATE_VALID = 100;
 
+	public static String DEFAULT_HOSTNAME = "localhost";
+	public static String DEFAULT_IPv4 = "127.0.0.1";
 
 }
