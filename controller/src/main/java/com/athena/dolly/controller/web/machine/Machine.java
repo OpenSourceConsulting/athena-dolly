@@ -30,14 +30,8 @@ public class Machine implements Serializable {
 	private int Id;
 	@Column(name = "name", nullable = false)
 	private String name;
-	@Column(name = "ipv4_address")
-	private String ipv4;
-	@Column(name = "ipv6_address")
-	private String ipv6;
 	@Column(name = "host_name")
 	private String host_name;
-	@Column(name = "mac_address", nullable = false)
-	private String mac_address;
 	@Column(name = "os_name", nullable = false)
 	private String os_name;
 	@Column(name = "os_version", nullable = false)
@@ -48,7 +42,7 @@ public class Machine implements Serializable {
 	private String cpu_clock_unit;
 	@Column(name = "memory_size", nullable = false)
 	private float memory_size;
-	@Column(name = "memory_unit", nullable = false)
+	@Column(name = "memory_size_unit", nullable = false)
 	private String memory_unit;
 	@Column(name = "cpu_core", nullable = false)
 	private int cpu_core;
@@ -62,7 +56,7 @@ public class Machine implements Serializable {
 	private String description;
 	@Column(name = "disk_size")
 	private float disk_size;
-	@Column(name = "disk_unit")
+	@Column(name = "disk_size_unit")
 	private String disk_unit;
 	@Column(name = "ssh_port")
 	private int ssh_port;
@@ -74,7 +68,10 @@ public class Machine implements Serializable {
 	private boolean is_vm;
 	@Column(name = "jvm")
 	private String jvm_version;
+	@Column(name = "state")
 	private int state;
+	@Column(name = "ssh_ipaddr")
+	private String sshIPAddr;
 
 	@OneToMany
 	private Collection<Disk> disks;
@@ -93,36 +90,12 @@ public class Machine implements Serializable {
 		this.name = name;
 	}
 
-	public String getIpv4() {
-		return ipv4;
-	}
-
-	public void setIpv4(String ipv4) {
-		this.ipv4 = ipv4;
-	}
-
-	public String getIpv6() {
-		return ipv6;
-	}
-
-	public void setIpv6(String ipv6) {
-		this.ipv6 = ipv6;
-	}
-
 	public String getHostName() {
 		return host_name;
 	}
 
 	public void setHostName(String host_name) {
 		this.host_name = host_name;
-	}
-
-	public String getMacAddress() {
-		return mac_address;
-	}
-
-	public void setMacAddress(String mac_address) {
-		this.mac_address = mac_address;
 	}
 
 	public String getOsName() {
@@ -272,15 +245,13 @@ public class Machine implements Serializable {
 	/**
 	 * Constructor
 	 */
-	public Machine(String mHostName, String mip4_addr, String mSSHUserName,
-			String mSSHPassword) {
-		host_name = mHostName;
-		ipv4 = mip4_addr;
+	public Machine(String mName, String mSSHIpaddr, String mSSHUserName,
+			String mSSHPassword, String mDescription) {
+		name = mName;
+		description = mDescription;
+		sshIPAddr = mSSHIpaddr;
 		ssh_username = mSSHUserName;
 		ssh_password = mSSHPassword;
-	}
-
-	public Machine() {
 	}
 
 	public Collection<Disk> getDisks() {
@@ -334,6 +305,22 @@ public class Machine implements Serializable {
 			return disks.remove(d);
 		}
 		return false;
+	}
+
+	public String getSSHIPAddr() {
+		return sshIPAddr;
+	}
+
+	public void setSSHIPAddr(String ssh_ipaddr) {
+		this.sshIPAddr = ssh_ipaddr;
+	}
+
+	public boolean isVM() {
+		return is_vm;
+	}
+
+	public void isVM(boolean is_vm) {
+		this.is_vm = is_vm;
 	}
 
 }

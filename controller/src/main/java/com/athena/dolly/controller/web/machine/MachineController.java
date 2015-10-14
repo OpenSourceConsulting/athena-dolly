@@ -19,11 +19,12 @@ public class MachineController implements InitializingBean {
 	@ResponseBody
 	public String add() {
 		String mName = "Example";// retrive from form
-		String hostName = "";// retrieve from form;
 		String ip4Addr = "192.168.0.88";// retrieve from form;
 		String sshUserName = "root";// retrieve from form;
 		String sshPasword = "test123";// retrieve from form;
-		Machine m = new Machine(hostName, ip4Addr, sshUserName, sshPasword);
+		String desciprtion = "";
+		Machine m = new Machine(mName, ip4Addr, sshUserName, sshPasword, desciprtion);
+
 		return service.add(m);
 	}
 

@@ -56,5 +56,5 @@ public abstract class DollyConstants {
 
 	public static String DEFAULT_HOSTNAME = "localhost";
 	public static String DEFAULT_IPv4 = "127.0.0.1";
-
+	public static String DEFAULT_CPU_MEASUREMENT_UNIT = "MHz";
 }
