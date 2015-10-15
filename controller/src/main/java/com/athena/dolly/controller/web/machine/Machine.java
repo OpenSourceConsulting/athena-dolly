@@ -31,43 +31,43 @@ public class Machine implements Serializable {
 	@Column(name = "name", nullable = false)
 	private String name;
 	@Column(name = "host_name")
-	private String host_name;
+	private String hostName;
 	@Column(name = "os_name", nullable = false)
-	private String os_name;
+	private String osName;
 	@Column(name = "os_version", nullable = false)
-	private String os_version;
+	private String osVersion;
 	@Column(name = "cpu_clock_speed", nullable = false)
-	private float cpu_clock_speed;
+	private float cpuClockSpeed;
 	@Column(name = "cpu_clock_unit", nullable = false)
-	private String cpu_clock_unit;
+	private String cpuClockUnit;
 	@Column(name = "memory_size", nullable = false)
-	private float memory_size;
+	private float memorySize;
 	@Column(name = "memory_size_unit", nullable = false)
-	private String memory_unit;
+	private String memorySizeUnit;
 	@Column(name = "cpu_core", nullable = false)
-	private int cpu_core;
+	private int cpuCore;
 	@Column(name = "os_arch", nullable = false)
-	private String os_arch;
+	private String osArch;
 	@Column(name = "origin_date", nullable = false)
-	private Date origin_date;
+	private Date originDate;
 	@Column(name = "last_shutdown")
-	private Date last_shutdown;
+	private Date lastShutdown;
 	@Column(name = "description")
 	private String description;
 	@Column(name = "disk_size")
-	private float disk_size;
+	private float diskSize;
 	@Column(name = "disk_size_unit")
-	private String disk_unit;
+	private String diskSizeUnit;
 	@Column(name = "ssh_port")
-	private int ssh_port;
+	private int sshPort;
 	@Column(name = "ssh_username")
-	private String ssh_username;
+	private String sshUsername;
 	@Column(name = "ssh_password")
-	private String ssh_password;
+	private String sshPassword;
 	@Column(name = "is_vm")
-	private boolean is_vm;
+	private boolean isVm;
 	@Column(name = "jvm")
-	private String jvm_version;
+	private String jvmVersion;
 	@Column(name = "state")
 	private int state;
 	@Column(name = "ssh_ipaddr")
@@ -80,7 +80,7 @@ public class Machine implements Serializable {
 	private Collection<Memory> memories;
 
 	@OneToMany
-	private Collection<NetworkInterface> network_interfaces;
+	private Collection<NetworkInterface> networkInterfaces;
 
 	public String getName() {
 		return name;
@@ -91,91 +91,91 @@ public class Machine implements Serializable {
 	}
 
 	public String getHostName() {
-		return host_name;
+		return hostName;
 	}
 
 	public void setHostName(String host_name) {
-		this.host_name = host_name;
+		this.hostName = host_name;
 	}
 
 	public String getOsName() {
-		return os_name;
+		return osName;
 	}
 
 	public void setOsName(String os_name) {
-		this.os_name = os_name;
+		this.osName = os_name;
 	}
 
 	public String getOsVersion() {
-		return os_version;
+		return osVersion;
 	}
 
 	public void setOsVersion(String os_version) {
-		this.os_version = os_version;
+		this.osVersion = os_version;
 	}
 
 	public float getCpuClockSpeed() {
-		return cpu_clock_speed;
+		return cpuClockSpeed;
 	}
 
 	public void setCpuClockSpeed(float cpu_clock_speed) {
-		this.cpu_clock_speed = cpu_clock_speed;
+		this.cpuClockSpeed = cpu_clock_speed;
 	}
 
 	public String getCpuClockUnit() {
-		return cpu_clock_unit;
+		return cpuClockUnit;
 	}
 
 	public void setCpuClockUnit(String cpu_clock_unit) {
-		this.cpu_clock_unit = cpu_clock_unit;
+		this.cpuClockUnit = cpu_clock_unit;
 	}
 
 	public float getMemorySize() {
-		return memory_size;
+		return memorySize;
 	}
 
 	public void setMemorySize(float memory_size) {
-		this.memory_size = memory_size;
+		this.memorySize = memory_size;
 	}
 
 	public String getMemoryUnit() {
-		return memory_unit;
+		return memorySizeUnit;
 	}
 
 	public void setMemoryUnit(String memory_unit) {
-		this.memory_unit = memory_unit;
+		this.memorySizeUnit = memory_unit;
 	}
 
 	public int getCpuCore() {
-		return cpu_core;
+		return cpuCore;
 	}
 
 	public void setCpuCore(int cpu_core) {
-		this.cpu_core = cpu_core;
+		this.cpuCore = cpu_core;
 	}
 
 	public String getOsArch() {
-		return os_arch;
+		return osArch;
 	}
 
 	public void setOsArch(String os_arch) {
-		this.os_arch = os_arch;
+		this.osArch = os_arch;
 	}
 
 	public Date getOriginDate() {
-		return origin_date;
+		return originDate;
 	}
 
 	public void setOriginDate(Date origin_date) {
-		this.origin_date = origin_date;
+		this.originDate = origin_date;
 	}
 
 	public Date getLastShutdown() {
-		return last_shutdown;
+		return lastShutdown;
 	}
 
 	public void setLastShutdown(Date last_shutdown) {
-		this.last_shutdown = last_shutdown;
+		this.lastShutdown = last_shutdown;
 	}
 
 	public String getDescription() {
@@ -187,51 +187,51 @@ public class Machine implements Serializable {
 	}
 
 	public float getDiskSize() {
-		return disk_size;
+		return diskSize;
 	}
 
 	public void setDiskSize(float disk_size) {
-		this.disk_size = disk_size;
+		this.diskSize = disk_size;
 	}
 
 	public String getDiskUnit() {
-		return disk_unit;
+		return diskSizeUnit;
 	}
 
 	public void setDiskUnit(String disk_unit) {
-		this.disk_unit = disk_unit;
+		this.diskSizeUnit = disk_unit;
 	}
 
 	public int getSshPort() {
-		return ssh_port;
+		return sshPort;
 	}
 
 	public void setSshPort(int ssh_port) {
-		this.ssh_port = ssh_port;
+		this.sshPort = ssh_port;
 	}
 
 	public String getSshUsername() {
-		return ssh_username;
+		return sshUsername;
 	}
 
 	public void setSshUsername(String ssh_username) {
-		this.ssh_username = ssh_username;
+		this.sshUsername = ssh_username;
 	}
 
 	public String getSshPassword() {
-		return ssh_password;
+		return sshPassword;
 	}
 
 	public void setSshPassword(String ssh_password) {
-		this.ssh_password = ssh_password;
+		this.sshPassword = ssh_password;
 	}
 
 	public String getJvmVersion() {
-		return jvm_version;
+		return jvmVersion;
 	}
 
 	public void setJvmVersion(String jvm_version) {
-		this.jvm_version = jvm_version;
+		this.jvmVersion = jvm_version;
 	}
 
 	public int getState() {
@@ -243,15 +243,35 @@ public class Machine implements Serializable {
 	}
 
 	/**
-	 * Constructor
+	 * Constructor with required information
+	 * 
+	 * @param mName
+	 *            Name of machine
+	 * @paramm mSSHIpaddr ssh ip address
+	 * @param mSSHUserName
+	 *            ssh username
+	 * @param mSSHPassword
+	 *            ssh password
+	 * @param mSSHPort
+	 *            ssh port
+	 * @param mDescription
+	 *            description of machine
 	 */
 	public Machine(String mName, String mSSHIpaddr, String mSSHUserName,
-			String mSSHPassword, String mDescription) {
+			String mSSHPassword, int mSSHPort, String mDescription) {
 		name = mName;
 		description = mDescription;
 		sshIPAddr = mSSHIpaddr;
-		ssh_username = mSSHUserName;
-		ssh_password = mSSHPassword;
+		sshUsername = mSSHUserName;
+		sshPassword = mSSHPassword;
+		sshPort = mSSHPort;
+	}
+
+	/**
+	 * Default constructor: Do nothing
+	 */
+	public Machine() {
+
 	}
 
 	public Collection<Disk> getDisks() {
@@ -279,15 +299,15 @@ public class Machine implements Serializable {
 
 	// network interfaces
 	public boolean addNetworkInterface(NetworkInterface ni) {
-		if (network_interfaces != null) {
-			return network_interfaces.add(ni);
+		if (networkInterfaces != null) {
+			return networkInterfaces.add(ni);
 		}
 		return false;
 	}
 
 	public boolean removeNetworkInterface(NetworkInterface ni) {
-		if (network_interfaces != null) {
-			return network_interfaces.remove(ni);
+		if (networkInterfaces != null) {
+			return networkInterfaces.remove(ni);
 		}
 		return false;
 	}
@@ -316,11 +336,11 @@ public class Machine implements Serializable {
 	}
 
 	public boolean isVM() {
-		return is_vm;
+		return isVm;
 	}
 
 	public void isVM(boolean is_vm) {
-		this.is_vm = is_vm;
+		this.isVm = is_vm;
 	}
 
 }

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MachineRepository extends JpaRepository<Machine, Integer> {
-	List<Machine> findBySshIPAddr(String ssh_ipaddr);
-	List<Machine> findByName(String name);
+
+	public List<Machine> findByNameOrSshIPAddr(String name, String sshIPAddr);
 }
