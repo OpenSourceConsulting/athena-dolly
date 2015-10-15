@@ -54,7 +54,23 @@ public abstract class DollyConstants {
 	 */
 	public static final int INSTANCE_STATE_VALID = 100;
 
+	/**
+	 * Default value of SSH port
+	 */
+	public static final int DEFAULT_SSH_PORT = 22;
+
+	/**
+	 * Default value of hostname
+	 */
 	public static String DEFAULT_HOSTNAME = "localhost";
+
+	/**
+	 * Default value of ip address version 4
+	 */
 	public static String DEFAULT_IPv4 = "127.0.0.1";
+
+	/**
+	 * Default value of cpu clock speed measurement unit
+	 */
 	public static String DEFAULT_CPU_MEASUREMENT_UNIT = "MHz";
 }
