@@ -24,18 +24,18 @@
  */
 package com.athena.dolly.controller.web.tomcat.instance;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * <pre>
- *
+ * 
  * </pre>
+ * 
  * @author Bong-Jin Kwon
+ * @author Tran Ho
  * @version 2.0
  */
-public interface TomcatInstanceRepository extends CrudRepository<TomcatInstance, Long> {
-	
-	Page<TomcatInstance> findAll(Pageable pageable);	
+public interface TomcatInstanceRepository extends
+		JpaRepository<TomcatInstance, Long> {
+
 }

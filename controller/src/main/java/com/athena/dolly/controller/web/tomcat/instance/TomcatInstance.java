@@ -24,6 +24,7 @@
  */
 package com.athena.dolly.controller.web.tomcat.instance;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,72 +33,60 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.athena.dolly.controller.web.domain.Domain;
+import com.athena.dolly.controller.web.machine.Machine;
+
 /**
  * <pre>
- *
+ * 
  * </pre>
- * @author Bong-Jin Kwon
+ * 
+ * @author Tran Ho
  * @version 2.0
  */
 @Entity
-@DynamicUpdate
-public class TomcatInstance {
+@Table(name = "tomcat")
+public class TomcatInstance implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
-	private Long id;
-	
-	@Column(nullable = false)
+	@Column(name = "Id")
+	private int Id;
+	@Column(name = "name", nullable = false)
 	private String instanceName;
-	
-	@Column(nullable = false)
-	private String ipAddr;
-	
-	@Column(nullable = false)
-	private String catalinaHome;
-	
-	@Column(nullable = false)
-	private String catalinaBase;
-	
-	@Column(nullable = false)
-	private String envScriptFile;
-
-	@Column(nullable = false)
-	private String startScriptFile;
-
-	@Column(nullable = false)
-	private String stopScriptFile;
-	
-	@Column(nullable = false)
-	private int sshPort;
-	
-	@Column(nullable = false)
-	private String sshUsername;
-	
-	@Column(nullable = false)
-	private String sshPassword;
-	
+	@Column(nullable = false, name = "http_port")
 	private int httpPort;
-	
-	private int applications; // application 개수
-	
+	@Column(nullable = false, name = "ajp_port")
+	private int ajpPort;
+	@Column(nullable = false, name = "redirect_port")
+	private int redirectPort;
+
+	@ManyToOne
+	private Machine machine;
+	@ManyToOne
+	private Domain domain;
+
 	private int state;
-	
-	@Column(columnDefinition="VARCHAR(500)")
-	private String errMsg;
-	
-	public TomcatInstance() {}
-	
-	public Long getId() {
-		return id;
+
+	public TomcatInstance() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		this.Id = id;
 	}
 
 	public String getInstanceName() {
@@ -108,78 +97,6 @@ public class TomcatInstance {
 		this.instanceName = instanceName;
 	}
 
-	public String getIpAddr() {
-		return ipAddr;
-	}
-
-	public void setIpAddr(String ipAddr) {
-		this.ipAddr = ipAddr;
-	}
-
-	public String getCatalinaHome() {
-		return catalinaHome;
-	}
-
-	public void setCatalinaHome(String catalinaHome) {
-		this.catalinaHome = catalinaHome;
-	}
-
-	public String getCatalinaBase() {
-		return catalinaBase;
-	}
-
-	public void setCatalinaBase(String catalinaBase) {
-		this.catalinaBase = catalinaBase;
-	}
-
-	public String getEnvScriptFile() {
-		return envScriptFile;
-	}
-
-	public void setEnvScriptFile(String envScriptFile) {
-		this.envScriptFile = envScriptFile;
-	}
-
-	public String getStartScriptFile() {
-		return startScriptFile;
-	}
-
-	public void setStartScriptFile(String startScriptFile) {
-		this.startScriptFile = startScriptFile;
-	}
-
-	public String getStopScriptFile() {
-		return stopScriptFile;
-	}
-
-	public void setStopScriptFile(String stopScriptFile) {
-		this.stopScriptFile = stopScriptFile;
-	}
-
-	public int getSshPort() {
-		return sshPort;
-	}
-
-	public void setSshPort(int sshPort) {
-		this.sshPort = sshPort;
-	}
-
-	public String getSshUsername() {
-		return sshUsername;
-	}
-
-	public void setSshUsername(String sshUsername) {
-		this.sshUsername = sshUsername;
-	}
-
-	public String getSshPassword() {
-		return sshPassword;
-	}
-
-	public void setSshPassword(String sshPassword) {
-		this.sshPassword = sshPassword;
-	}
-
 	public int getHttpPort() {
 		return httpPort;
 	}
@@ -188,28 +105,20 @@ public class TomcatInstance {
 		this.httpPort = httpPort;
 	}
 
-	public int getApplications() {
-		return applications;
+	public int getAjpPort() {
+		return ajpPort;
 	}
 
-	public void setApplications(int applications) {
-		this.applications = applications;
+	public void setAjpPort(int ajpPort) {
+		this.ajpPort = ajpPort;
 	}
 
-	public int getState() {
-		return state;
+	public int getRedirectPort() {
+		return redirectPort;
 	}
 
-	public void setState(int state) {
-		this.state = state;
-	}
-
-	public String getErrMsg() {
-		return errMsg;
-	}
-
-	public void setErrMsg(String errMsg) {
-		this.errMsg = errMsg;
+	public void setRedirectPort(int redirectPort) {
+		this.redirectPort = redirectPort;
 	}
 
 }
