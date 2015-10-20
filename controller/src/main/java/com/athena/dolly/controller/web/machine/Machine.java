@@ -343,4 +343,8 @@ public class Machine implements Serializable {
 		this.isVm = is_vm;
 	}
 
+	public int getId() {
+		return Id;
+	}
+
 }
