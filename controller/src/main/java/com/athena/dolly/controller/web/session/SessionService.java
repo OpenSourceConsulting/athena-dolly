@@ -1,10 +1,13 @@
 package com.athena.dolly.controller.web.session;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.athena.dolly.controller.ServiceResult;
 import com.athena.dolly.controller.ServiceResult.Status;
+import com.athena.dolly.controller.web.machine.Machine;
 
 @Service
 public class SessionService {
@@ -37,5 +40,16 @@ public class SessionService {
 		}
 		sessionRepo.delete(Id);
 		return new ServiceResult(Status.DONE, "Done");
+	}
+
+	public ServiceResult retrieve(int Id) {
+		Session s = sessionRepo.findOne(Id);
+		return new ServiceResult(Status.DONE, "Done", s);
+	}
+
+	public ServiceResult retrieve(int page, int size) {
+		Page<Session> sessions = sessionRepo
+				.findAll(new PageRequest(page, size));
+		return new ServiceResult(Status.DONE, "Done", sessions);
 	}
 }
