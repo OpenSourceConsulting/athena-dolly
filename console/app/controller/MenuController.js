@@ -21,7 +21,6 @@ Ext.define('webapp.controller.MenuController', {
         var menuId = record.get("menuId");
         var is_leaf = record.get("leaf");
         if(menuId !== undefined){
-            alert(menuId);
             if (!is_leaf){
                this.loadChildMenus(menuId);
             }
@@ -66,39 +65,50 @@ Ext.define('webapp.controller.MenuController', {
         var url = GlobalData.urlPrefix;
         var is_child_leaf = false;
         var prefix_child_menu_id = "";
-        if (parentId.indexOf("tomcatMng") >=0) {
+        var params = {};
+        if (parentId.indexOf("tomcatMng") >=0 && parentId.length == "tomcatMng".length) {
             url+="/domain/list";
             is_child_leaf = false;
-            prefix_child_menu_id = "domain_tomcat_";
+            prefix_child_menu_id = parentId + "_domain_";
         }
-        else if (parentId.indexOf("domain_tomcat") >= 0) {
+        else if (parentId.indexOf("tomcatMng_domain") >= 0) {
+            var domainId = parentId.substr(parentId.lastIndexOf("_") + 1);
+            params = {"domainId":domainId};
             url+="/domain/tomcatlist";
             is_child_leaf = true;
-            prefix_child_menu_id = "tomcat_";
+            prefix_child_menu_id = parentId + "_tomcat_";
+
         }
         else if (parentId.indexOf("monitoring_servers") >= 0) {
             url+="machine/list";
             is_child_leaf = true;
-            prefix_child_menu_id = "monitoring_server_";
+            prefix_child_menu_id = parentId + "_server_";
         }
-        else if (parentId.indexOf("monitoring_tomcatins") >= 0) {
+        else if (parentId.indexOf("monitoring_tomcats") >= 0) {
             url+="tomcat/list";
             is_child_leaf = true;
-            prefix_child_menu_id = "monitoring_tomcat_";
+            prefix_child_menu_id = parentId + "_tomcat_";
         }
         else {
              return;
         }
 
         var treePanel = Ext.getCmp("menuTreePanel");
-
+        var parentNode = treePanel.getRootNode().findChild("menuId", parentId, true);
+        if (parentNode === undefined || parentNode === null) {
+            return;
+        }
+        //remove all childs
+        parentNode.removeAll();
         //get data from ajax
         Ext.Ajax.request({
             url: url,
+            params: params,
+            method: "GET",
             success: function(resp, ops) {
                 var response = Ext.decode(resp.responseText);
                 for(i = 0; i < response.length; i ++){
-                    treePanel.getRootNode().findChild("menuId", parentId, true).appendChild({"text":response[i].name, "menuId": prefix_child_menu_id + response[i].id, "leaf": is_child_leaf});
+                    parentNode.appendChild({"text":response[i].name, "menuId": prefix_child_menu_id + response[i].id, "leaf": is_child_leaf,"expanded":!is_child_leaf});
                 }
             }
         });

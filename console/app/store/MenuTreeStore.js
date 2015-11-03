@@ -57,7 +57,7 @@ Ext.define('webapp.store.MenuTreeStore', {
                             },
                             {
                                 text: 'Tomcat Instances',
-                                menuId: 'monitoring_tomcatins',
+                                menuId: 'monitoring_tomcats',
                                 expanded: true,
                                 children: [
                                     
