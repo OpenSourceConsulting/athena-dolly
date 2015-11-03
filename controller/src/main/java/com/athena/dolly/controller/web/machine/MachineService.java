@@ -1,5 +1,6 @@
 package com.athena.dolly.controller.web.machine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.omg.CORBA.OMGVMCID;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +25,8 @@ import com.athena.dolly.controller.common.SSHManager;
  */
 
 @Service
- public class MachineService implements InitializingBean {
-//public class MachineService {
+public class MachineService implements InitializingBean {
+	// public class MachineService {
 	@Autowired
 	private MachineRepository machineRepo;
 
@@ -42,8 +44,8 @@ import com.athena.dolly.controller.common.SSHManager;
 	public ServiceResult add(String name, String description, String sshAddr,
 			int sshPort, String sshUserName, String sshPassword) {
 		// check existing
-		List<Machine> existingMachines = machineRepo.findByNameOrSshIPAddr(name,
-				sshAddr);
+		List<Machine> existingMachines = machineRepo.findByNameOrSshIPAddr(
+				name, sshAddr);
 		if (existingMachines != null) {
 			if (existingMachines.size() > 0) {
 				return new ServiceResult(Status.FAILED, "Duplicate machine");
@@ -74,8 +76,22 @@ import com.athena.dolly.controller.common.SSHManager;
 	 * @return ServiceStatus
 	 */
 	public ServiceResult retrieve(int page, int size) {
-		Page<Machine> machines = machineRepo.findAll(new PageRequest(page, size));
+		Page<Machine> machines = machineRepo
+				.findAll(new PageRequest(page, size));
 		return new ServiceResult(Status.DONE, "Done", machines);
+	}
+
+	public ServiceResult retrieve(int id) {
+		return new ServiceResult(Status.DONE, "", machineRepo.findOne(id));
+	}
+
+	public ServiceResult getList() {
+		
+		List<Machine> list = machineRepo.findAll();
+		//List<Machine> list = new ArrayList<Machine>();
+		//Machine m = new Machine("aaaa", "192.168.0.1", "root", "1234", 12, "dasda");
+		//list.add(m);
+		return new ServiceResult(Status.DONE, "", list);
 	}
 
 	/**
@@ -243,15 +259,16 @@ import com.athena.dolly.controller.common.SSHManager;
 	public ServiceResult count() {
 		return new ServiceResult(Status.DONE, "", machineRepo.count());
 	}
+
 	// for testing bean creation
-	 @Override
-	 public void afterPropertiesSet() throws Exception {
-	 System.err.println("=====================================");
-	 System.err.println("=====================================");
-	 System.err.println("=====================================");
-	 System.err.println("repo : " + machineRepo);
-	 System.err.println("=====================================");
-	 System.err.println("=====================================");
-	 System.err.println("=====================================");
-	 }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.err.println("=====================================");
+		System.err.println("=====================================");
+		System.err.println("=====================================");
+		System.err.println("repo : " + machineRepo);
+		System.err.println("=====================================");
+		System.err.println("=====================================");
+		System.err.println("=====================================");
+	}
 }

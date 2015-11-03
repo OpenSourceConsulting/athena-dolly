@@ -2,6 +2,7 @@ package com.athena.dolly.controller.web.machine;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
@@ -22,6 +23,8 @@ public class NetworkInterface {
 	private String default_gateway;
 	@Column(name = "netmask")
 	private String netmask;
+	@ManyToOne
+	private Machine machine;
 
 	public String getNetmask() {
 		return netmask;
@@ -69,5 +72,13 @@ public class NetworkInterface {
 
 	public void setId(int id) {
 		Id = id;
+	}
+
+	public Machine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(Machine machine) {
+		this.machine = machine;
 	}
 }

@@ -1,5 +1,7 @@
 package com.athena.dolly.controller.web.machine;
 
+import java.util.List;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.athena.dolly.controller.DollyConstants;
 import com.athena.dolly.controller.ServiceResult;
+import com.athena.dolly.controller.ServiceResult.Status;
 import com.athena.dolly.controller.common.SSHManager;
 import com.athena.dolly.controller.web.common.model.ExtjsGridParam;
 import com.athena.dolly.controller.web.common.model.GridJsonResponse;
+import com.athena.dolly.controller.web.common.model.SimpleJsonResponse;
 
 @Controller
 @RequestMapping("/machine")
@@ -37,12 +41,22 @@ public class MachineController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
-	public GridJsonResponse getList(GridJsonResponse res,
-			ExtjsGridParam gridParam) {
-		Page<Machine> machines = (Page<Machine>) service.retrieve(1, 10)
-				.getReturnedVal();
-		res.setTotal(machines.getNumber());
-		res.setList(machines.getContent());
+	public List<Machine> getList() {
+		ServiceResult result = service.getList();
+		if (result.getStatus() == Status.DONE) {
+			List<Machine> list = (List<Machine>) result.getReturnedVal();
+			return list;
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	@ResponseBody
+	public SimpleJsonResponse get() {
+		int id = 1;
+		SimpleJsonResponse res = new SimpleJsonResponse();
+		Machine m = (Machine) service.retrieve(id).getReturnedVal();
+		res.setData(m);
 		return res;
 	}
 	// for testing bean creation

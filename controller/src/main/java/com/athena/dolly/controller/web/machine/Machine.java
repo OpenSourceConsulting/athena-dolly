@@ -312,20 +312,20 @@ public class Machine implements Serializable {
 		return false;
 	}
 
-	// network interfaces
-	public boolean addDisk(Disk d) {
-		if (disks != null) {
-			return disks.add(d);
-		}
-		return false;
-	}
-
-	public boolean removeDisk(Disk d) {
-		if (disks != null) {
-			return disks.remove(d);
-		}
-		return false;
-	}
+	// disks
+//	public boolean addDisk(Disk d) {
+//		if (disks != null) {
+//			return disks.add(d);
+//		}
+//		return false;
+//	}
+//
+//	public boolean removeDisk(Disk d) {
+//		if (disks != null) {
+//			return disks.remove(d);
+//		}
+//		return false;
+//	}
 
 	public String getSSHIPAddr() {
 		return sshIPAddr;

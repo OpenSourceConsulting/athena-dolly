@@ -1,8 +1,12 @@
 package com.athena.dolly.controller.web.machine;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Disk drive object
@@ -11,8 +15,13 @@ import javax.persistence.Id;
  * 
  */
 @Entity
-public class Disk {
+@Table(name = "disk")
+public class Disk implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "Id")
 	private int Id;
@@ -23,24 +32,30 @@ public class Disk {
 	@Column(name = "unit")
 	private String unit; // MB, GB
 	@Column(name = "file_system")
-	private String file_system;
+	private String fileSystem;
 	@Column(name = "free_capacity")
-	private double free_capacity;
+	private double freeCapacity;
+	@ManyToOne
+	private Machine machine;
+
+	public Disk() {
+
+	}
 
 	public double getFreeCapacity() {
-		return free_capacity;
+		return freeCapacity;
 	}
 
 	public void setFreeCapacity(double free_capacity) {
-		this.free_capacity = free_capacity;
+		this.freeCapacity = free_capacity;
 	}
 
 	public String getFileSystem() {
-		return file_system;
+		return fileSystem;
 	}
 
 	public void setFileSystem(String file_system) {
-		this.file_system = file_system;
+		this.fileSystem = file_system;
 	}
 
 	public String getUnit() {
@@ -73,5 +88,13 @@ public class Disk {
 
 	public void setId(int id) {
 		Id = id;
+	}
+
+	public Machine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(Machine machine) {
+		this.machine = machine;
 	}
 }

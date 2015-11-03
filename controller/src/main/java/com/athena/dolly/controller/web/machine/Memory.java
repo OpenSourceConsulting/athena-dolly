@@ -6,6 +6,8 @@ package com.athena.dolly.controller.web.machine;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Memory object (RAM)
@@ -14,6 +16,7 @@ import javax.persistence.Id;
  * 
  */
 @Entity
+@Table(name = "memory")
 public class Memory {
 
 	@Id
@@ -27,6 +30,9 @@ public class Memory {
 	private String unit;
 	@Column(name = "type")
 	private String type;
+
+	@ManyToOne
+	private Machine machine;
 
 	public String getType() {
 		return type;
@@ -66,5 +72,13 @@ public class Memory {
 
 	public void setId(int id) {
 		Id = id;
+	}
+
+	public Machine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(Machine machine) {
+		this.machine = machine;
 	}
 }
