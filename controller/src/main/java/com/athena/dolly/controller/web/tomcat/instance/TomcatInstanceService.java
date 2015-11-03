@@ -38,6 +38,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.athena.dolly.controller.DollyConstants;
+import com.athena.dolly.controller.ServiceResult;
+import com.athena.dolly.controller.ServiceResult.Status;
 import com.athena.dolly.controller.common.SSHManager;
 import com.athena.dolly.controller.tomcat.instance.domain.ConfigFileVersion;
 import com.athena.dolly.controller.tomcat.instance.domain.ConfigFileVersionRepository;
@@ -74,6 +76,10 @@ public class TomcatInstanceService {
 
 	public Page<TomcatInstance> getList(Pageable pageable) {
 		return repo.findAll(pageable);
+	}
+
+	public ServiceResult getTomcatListByDomainId(int domainId) {
+		return new ServiceResult(Status.DONE, "", repo.findByDomainId(domainId));
 	}
 
 	/**

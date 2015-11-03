@@ -63,7 +63,7 @@ public class TomcatInstance implements Serializable {
 	@Column(name = "Id")
 	private int Id;
 	@Column(name = "name", nullable = false)
-	private String instanceName;
+	private String name;
 	@Column(nullable = false, name = "http_port")
 	private int httpPort;
 	@Column(nullable = false, name = "ajp_port")
@@ -89,12 +89,12 @@ public class TomcatInstance implements Serializable {
 		this.Id = id;
 	}
 
-	public String getInstanceName() {
-		return instanceName;
+	public String getName() {
+		return name;
 	}
 
-	public void setInstanceName(String instanceName) {
-		this.instanceName = instanceName;
+	public void setName(String instanceName) {
+		this.name = instanceName;
 	}
 
 	public int getHttpPort() {

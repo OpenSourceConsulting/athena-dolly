@@ -24,6 +24,8 @@
  */
 package com.athena.dolly.controller.web.tomcat.instance;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -37,5 +39,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface TomcatInstanceRepository extends
 		JpaRepository<TomcatInstance, Long> {
+	List<TomcatInstance> findByDomainId(int domainId);
 
 }
