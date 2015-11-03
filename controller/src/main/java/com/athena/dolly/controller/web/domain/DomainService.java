@@ -27,4 +27,8 @@ public class DomainService {
 		return new ServiceResult(Status.DONE, "Not implemented yet");
 	}
 
+	public ServiceResult retrieve() {
+		return new ServiceResult(Status.DONE, "", domainRepo.findAll());
+	}
+
 }

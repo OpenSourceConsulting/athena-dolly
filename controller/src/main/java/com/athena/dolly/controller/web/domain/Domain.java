@@ -24,11 +24,35 @@ public class Domain implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "Id")
-	private int Id;
+	private int id;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "is_clustering")
 	private boolean isClustering;
-	// @OneToOne
-	// private DataGridServerGroup serverGroup;
+	//@OneToOne
+	//private DataGridServerGroup serverGroup;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		id = id;
+	}
+
+	public boolean isClustering() {
+		return isClustering;
+	}
+
+	public void setClustering(boolean isClustering) {
+		this.isClustering = isClustering;
+	}
 }
