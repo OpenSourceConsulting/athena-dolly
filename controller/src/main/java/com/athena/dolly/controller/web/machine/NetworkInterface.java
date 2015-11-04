@@ -1,15 +1,23 @@
 package com.athena.dolly.controller.web.machine;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "network_interface")
-public class NetworkInterface {
+public class NetworkInterface implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "Id")
 	private int Id;
@@ -24,6 +32,8 @@ public class NetworkInterface {
 	@Column(name = "netmask")
 	private String netmask;
 	@ManyToOne
+	// using this annotation to prevent Infinite recursion json mapping
+	@JsonBackReference
 	private Machine machine;
 
 	public String getNetmask() {

@@ -6,12 +6,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * Represent the machine information
@@ -20,11 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "machine")
-public class Machine implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Machine {
 	@Id
 	@Column(name = "Id")
 	private int Id;
@@ -73,13 +72,17 @@ public class Machine implements Serializable {
 	@Column(name = "ssh_ipaddr")
 	private String sshIPAddr;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "machine")
+	//using this annotation to prevent Infinite recursion json mapping
+	@JsonManagedReference  
 	private Collection<Disk> disks;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "machine")
+	@JsonManagedReference
 	private Collection<Memory> memories;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "machine")
+	@JsonManagedReference
 	private Collection<NetworkInterface> networkInterfaces;
 
 	public String getName() {
@@ -284,48 +287,48 @@ public class Machine implements Serializable {
 
 	// memory
 	public boolean addMemory(Memory m) {
-		if (memories != null) {
-			return memories.add(m);
+		if (getMemories() != null) {
+			return getMemories().add(m);
 		}
 		return false;
 	}
 
 	public boolean removeMemory(Memory m) {
-		if (memories != null) {
-			return memories.remove(m);
+		if (getMemories() != null) {
+			return getMemories().remove(m);
 		}
 		return false;
 	}
 
 	// network interfaces
 	public boolean addNetworkInterface(NetworkInterface ni) {
-		if (networkInterfaces != null) {
-			return networkInterfaces.add(ni);
+		if (getNetworkInterfaces() != null) {
+			return getNetworkInterfaces().add(ni);
 		}
 		return false;
 	}
 
 	public boolean removeNetworkInterface(NetworkInterface ni) {
-		if (networkInterfaces != null) {
-			return networkInterfaces.remove(ni);
+		if (getNetworkInterfaces() != null) {
+			return getNetworkInterfaces().remove(ni);
 		}
 		return false;
 	}
 
 	// disks
-//	public boolean addDisk(Disk d) {
-//		if (disks != null) {
-//			return disks.add(d);
-//		}
-//		return false;
-//	}
-//
-//	public boolean removeDisk(Disk d) {
-//		if (disks != null) {
-//			return disks.remove(d);
-//		}
-//		return false;
-//	}
+	public boolean addDisk(Disk d) {
+		if (disks != null) {
+			return disks.add(d);
+		}
+		return false;
+	}
+
+	public boolean removeDisk(Disk d) {
+		if (disks != null) {
+			return disks.remove(d);
+		}
+		return false;
+	}
 
 	public String getSSHIPAddr() {
 		return sshIPAddr;
@@ -345,6 +348,23 @@ public class Machine implements Serializable {
 
 	public int getId() {
 		return Id;
+	}
+
+	public Collection<Memory> getMemories() {
+		return memories;
+	}
+
+	public void setMemories(Collection<Memory> memories) {
+		this.memories = memories;
+	}
+
+	public Collection<NetworkInterface> getNetworkInterfaces() {
+		return networkInterfaces;
+	}
+
+	public void setNetworkInterfaces(
+			Collection<NetworkInterface> networkInterfaces) {
+		this.networkInterfaces = networkInterfaces;
 	}
 
 }

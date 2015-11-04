@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * Disk drive object
  * 
@@ -16,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "disk")
-public class Disk implements Serializable{
+public class Disk implements Serializable {
 
 	/**
 	 * 
@@ -36,6 +38,8 @@ public class Disk implements Serializable{
 	@Column(name = "free_capacity")
 	private double freeCapacity;
 	@ManyToOne
+	//using this annotation to prevent Infinite recursion json mapping
+	@JsonBackReference
 	private Machine machine;
 
 	public Disk() {

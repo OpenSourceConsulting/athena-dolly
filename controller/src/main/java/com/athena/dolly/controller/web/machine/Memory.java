@@ -3,11 +3,15 @@
  */
 package com.athena.dolly.controller.web.machine;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * Memory object (RAM)
@@ -17,8 +21,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "memory")
-public class Memory {
+public class Memory implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "Id")
 	private int Id;
@@ -32,6 +40,8 @@ public class Memory {
 	private String type;
 
 	@ManyToOne
+	// using this annotation to prevent Infinite recursion json mapping
+	@JsonBackReference
 	private Machine machine;
 
 	public String getType() {
