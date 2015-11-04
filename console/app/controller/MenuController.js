@@ -17,7 +17,6 @@ Ext.define('webapp.controller.MenuController', {
     extend: 'Ext.app.Controller',
 
     onTreepanelItemClick: function(dataview, record, item, index, e, eOpts) {
-        //alert(record.get("text"));
         var menuId = record.get("menuId");
         var is_leaf = record.get("leaf");
         if(menuId !== undefined){
