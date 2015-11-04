@@ -17,7 +17,7 @@ public class UserService implements InitializingBean {
 		//repo = new UserRepository();
 	}
 
-	public List<UserDto> getList() {
+	public List<User> getList() {
 		return repo.getList();
 	}
 

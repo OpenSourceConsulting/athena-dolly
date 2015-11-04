@@ -1,15 +1,20 @@
 package com.athena.dolly.controller.web.application;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
+import com.athena.dolly.controller.web.session.Session;
 import com.athena.dolly.controller.web.tomcat.instance.TomcatInstance;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "application")
@@ -43,7 +48,13 @@ public class Application implements Serializable {
 	private Date lastStartedDate;
 	private int state;
 	@ManyToOne
-	TomcatInstance tomcat;
+	// using this annotation to prevent Infinite recursion json mapping
+	@JsonBackReference
+	private TomcatInstance tomcat;
+
+	@OneToMany(mappedBy = "application")
+	@JsonManagedReference
+	private Collection<Session> sessions;
 
 	public String getContextPath() {
 		return contextPath;
@@ -123,5 +134,21 @@ public class Application implements Serializable {
 
 	public void setState(int state) {
 		this.state = state;
+	}
+
+	public TomcatInstance getTomcat() {
+		return tomcat;
+	}
+
+	public void setTomcat(TomcatInstance tomcat) {
+		this.tomcat = tomcat;
+	}
+
+	public Collection<Session> getSessions() {
+		return sessions;
+	}
+
+	public void setSessions(Collection<Session> sessions) {
+		this.sessions = sessions;
 	}
 }

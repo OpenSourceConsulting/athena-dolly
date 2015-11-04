@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 import com.athena.dolly.controller.web.application.Application;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "session")
@@ -19,6 +20,7 @@ public class Session {
 	@Column(name = "session_value")
 	private String value;
 	@ManyToOne
+	@JsonBackReference
 	private Application application;
 
 	public Session(String sKey, String sValue) {

@@ -1,12 +1,19 @@
 package com.athena.dolly.controller.web.domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Id;
+
+import com.athena.dolly.controller.web.datagridserver.DatagridServerGroup;
+import com.athena.dolly.controller.web.tomcat.instance.TomcatInstance;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * A domain is used for grouping one or more tomcat instance. It is associated
@@ -29,8 +36,12 @@ public class Domain implements Serializable {
 	private String name;
 	@Column(name = "is_clustering")
 	private boolean isClustering;
-	//@OneToOne
-	//private DataGridServerGroup serverGroup;
+	@OneToOne
+	private DatagridServerGroup serverGroup;
+
+	@OneToMany(mappedBy = "domain")
+	@JsonManagedReference
+	private Collection<TomcatInstance> tomcats;
 
 	public String getName() {
 		return name;
@@ -45,7 +56,7 @@ public class Domain implements Serializable {
 	}
 
 	public void setId(int id) {
-		id = id;
+		this.id = id;
 	}
 
 	public boolean isClustering() {

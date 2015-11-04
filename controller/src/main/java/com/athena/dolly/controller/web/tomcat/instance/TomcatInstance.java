@@ -25,22 +25,22 @@
 package com.athena.dolly.controller.web.tomcat.instance;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.DynamicUpdate;
-
+import com.athena.dolly.controller.web.application.Application;
+import com.athena.dolly.controller.web.datasource.Datasource;
 import com.athena.dolly.controller.web.domain.Domain;
 import com.athena.dolly.controller.web.machine.Machine;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * <pre>
@@ -72,9 +72,21 @@ public class TomcatInstance implements Serializable {
 	private int redirectPort;
 
 	@ManyToOne
+	// using this annotation to prevent Infinite recursion json mapping
+	@JsonBackReference
 	private Machine machine;
 	@ManyToOne
+	// using this annotation to prevent Infinite recursion json mapping
+	@JsonBackReference
 	private Domain domain;
+
+	@OneToMany
+	// using this annotation to prevent Infinite recursion json mapping
+	@JsonManagedReference
+	private Collection<Application> applications;
+
+	@ManyToMany
+	private Collection<Datasource> datasources;
 
 	private int state;
 
@@ -119,6 +131,46 @@ public class TomcatInstance implements Serializable {
 
 	public void setRedirectPort(int redirectPort) {
 		this.redirectPort = redirectPort;
+	}
+
+	public Machine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(Machine machine) {
+		this.machine = machine;
+	}
+
+	public Domain getDomain() {
+		return domain;
+	}
+
+	public void setDomain(Domain domain) {
+		this.domain = domain;
+	}
+
+	public Collection<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(Collection<Application> applications) {
+		this.applications = applications;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public Collection<Datasource> getDatasources() {
+		return datasources;
+	}
+
+	public void setDatasources(Collection<Datasource> datasources) {
+		this.datasources = datasources;
 	}
 
 }

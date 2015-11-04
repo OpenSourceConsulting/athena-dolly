@@ -12,8 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.athena.dolly.controller.web.datagridserver.DatagridServer;
+import com.athena.dolly.controller.web.env.EnvironmentVariable;
+import com.athena.dolly.controller.web.tomcat.instance.TomcatInstance;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -73,8 +77,8 @@ public class Machine {
 	private String sshIPAddr;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "machine")
-	//using this annotation to prevent Infinite recursion json mapping
-	@JsonManagedReference  
+	// using this annotation to prevent Infinite recursion json mapping
+	@JsonManagedReference
 	private Collection<Disk> disks;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "machine")
@@ -84,6 +88,16 @@ public class Machine {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "machine")
 	@JsonManagedReference
 	private Collection<NetworkInterface> networkInterfaces;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "machine")
+	@JsonManagedReference
+	private Collection<TomcatInstance> tomcatInstances;
+
+	@OneToOne
+	private DatagridServer datagridServer;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "machine")
+	private Collection<EnvironmentVariable> environmentVariables;
 
 	public String getName() {
 		return name;
@@ -365,6 +379,31 @@ public class Machine {
 	public void setNetworkInterfaces(
 			Collection<NetworkInterface> networkInterfaces) {
 		this.networkInterfaces = networkInterfaces;
+	}
+
+	public Collection<TomcatInstance> getTomcatInstances() {
+		return tomcatInstances;
+	}
+
+	public void setTomcatInstances(Collection<TomcatInstance> tomcatInstances) {
+		this.tomcatInstances = tomcatInstances;
+	}
+
+	public DatagridServer getDatagridServer() {
+		return datagridServer;
+	}
+
+	public void setDatagridServer(DatagridServer datagridServer) {
+		this.datagridServer = datagridServer;
+	}
+
+	public Collection<EnvironmentVariable> getEnvironmentVariables() {
+		return environmentVariables;
+	}
+
+	public void setEnvironmentVariables(
+			Collection<EnvironmentVariable> environmentVariables) {
+		this.environmentVariables = environmentVariables;
 	}
 
 }

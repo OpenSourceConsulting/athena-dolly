@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DataGridServerRepository extends
-		JpaRepository<DataGridServer, Integer> {
+		JpaRepository<DatagridServer, Integer> {
 
 }

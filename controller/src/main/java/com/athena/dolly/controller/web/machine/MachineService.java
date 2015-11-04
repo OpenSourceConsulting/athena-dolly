@@ -88,9 +88,6 @@ public class MachineService implements InitializingBean {
 	public ServiceResult getList() {
 		
 		List<Machine> list = machineRepo.findAll();
-		//List<Machine> list = new ArrayList<Machine>();
-		//Machine m = new Machine("aaaa", "192.168.0.1", "root", "1234", 12, "dasda");
-		//list.add(m);
 		return new ServiceResult(Status.DONE, "", list);
 	}
 

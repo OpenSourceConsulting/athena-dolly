@@ -1,9 +1,14 @@
 package com.athena.dolly.controller.web.datasource;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Id;
+
+import com.athena.dolly.controller.web.tomcat.instance.TomcatInstance;
 
 @Entity
 @Table(name = "data_source")
@@ -29,6 +34,9 @@ public class Datasource {
 	private int minConnectionPool;
 	@Column(name = "jdbc_url")
 	private String jdbcUrl;
+
+	@ManyToMany
+	private Collection<TomcatInstance> tomcatInstances;
 
 	public int getId() {
 		return Id;
@@ -108,5 +116,13 @@ public class Datasource {
 
 	public void setJdbcUrl(String jdbcUrl) {
 		this.jdbcUrl = jdbcUrl;
+	}
+
+	public Collection<TomcatInstance> getTomcatInstances() {
+		return tomcatInstances;
+	}
+
+	public void setTomcatInstances(Collection<TomcatInstance> tomcatInstances) {
+		this.tomcatInstances = tomcatInstances;
 	}
 }

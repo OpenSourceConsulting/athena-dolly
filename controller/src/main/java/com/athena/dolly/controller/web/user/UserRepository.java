@@ -15,15 +15,15 @@ import com.google.gson.JsonParser;
 public class UserRepository implements IUserRepository {
 
 	@Override
-	public boolean insert(UserDto user) {
+	public boolean insert(User user) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<UserDto> getList() {
+	public List<User> getList() {
 		// TODO Auto-generated method stub
-		List<UserDto> users = new ArrayList<UserDto>();
+		List<User> users = new ArrayList<User>();
 		// FileReader reader;
 
 		// reader = new FileReader("src\\mainresources\\users.json");
@@ -33,7 +33,7 @@ public class UserRepository implements IUserRepository {
 				.getAsJsonArray();
 		for (int i = 0; i < jsonArr.size(); i++) {
 			JsonObject obj = jsonArr.get(i).getAsJsonObject();
-			users.add(new UserDto(obj.get("userId").getAsString(), obj.get(
+			users.add(new User(obj.get("userId").getAsString(), obj.get(
 					"password").getAsString()));
 		}
 

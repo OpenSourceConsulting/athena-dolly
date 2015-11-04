@@ -2,15 +2,17 @@ package com.athena.dolly.controller.web.datagridserver;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
 import com.athena.dolly.controller.web.machine.Machine;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "datagrid_server")
-public class DataGridServer {
+public class DatagridServer {
 
 	@Id
 	@Column(name = "Id")
@@ -19,6 +21,10 @@ public class DataGridServer {
 	private String type;
 	@OneToOne
 	private Machine machine;
+
+	@ManyToOne
+	@JsonBackReference
+	private DatagridServerGroup datagridServerGroup;
 
 	public int getId() {
 		return Id;

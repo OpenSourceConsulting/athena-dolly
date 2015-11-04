@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 public interface IUserRepository {
-	boolean insert(UserDto user);
+	boolean insert(User user);
 
-	List<UserDto> getList();
+	List<User> getList();
 }
