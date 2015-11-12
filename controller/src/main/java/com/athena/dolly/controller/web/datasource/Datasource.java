@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -35,6 +37,7 @@ public class Datasource {
 	@Column(name = "jdbc_url")
 	private String jdbcUrl;
 
+	@JoinTable(name = "tomcat_datasource", joinColumns = { @JoinColumn(name = "datasource_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "tomcat_id", referencedColumnName = "id") })
 	@ManyToMany
 	private Collection<TomcatInstance> tomcatInstances;
 

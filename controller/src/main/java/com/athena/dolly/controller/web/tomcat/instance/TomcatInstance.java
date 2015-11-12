@@ -30,6 +30,8 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -85,6 +87,7 @@ public class TomcatInstance implements Serializable {
 	@JsonManagedReference
 	private Collection<Application> applications;
 
+	@JoinTable(name = "tomcat_datasource", joinColumns = { @JoinColumn(name = "tomcat_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "datasource_id", referencedColumnName = "id") })
 	@ManyToMany
 	private Collection<Datasource> datasources;
 
