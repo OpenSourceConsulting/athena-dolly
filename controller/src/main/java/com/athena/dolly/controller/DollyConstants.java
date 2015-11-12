@@ -73,4 +73,14 @@ public abstract class DollyConstants {
 	 * Default value of cpu clock speed measurement unit
 	 */
 	public static String DEFAULT_CPU_MEASUREMENT_UNIT = "MHz";
+
+	/**
+	 * Class driver for MySQL
+	 */
+	public static String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
+
+	/**
+	 * Class driver for Oracle
+	 */
+	public static String ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
 }
