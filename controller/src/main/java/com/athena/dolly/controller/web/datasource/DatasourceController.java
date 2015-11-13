@@ -64,7 +64,7 @@ public class DatasourceController {
 		return (List<Datasource>) result.getReturnedVal();
 	}
 
-	@RequestMapping("/add")
+	@RequestMapping("/edit")
 	@ResponseBody
 	public boolean edit() {
 		// for testing. Later, get the information from UI form
