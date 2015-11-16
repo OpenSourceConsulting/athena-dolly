@@ -40,5 +40,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TomcatInstanceRepository extends
 		JpaRepository<TomcatInstance, Long> {
 	List<TomcatInstance> findByDomainId(int domainId);
-
 }
