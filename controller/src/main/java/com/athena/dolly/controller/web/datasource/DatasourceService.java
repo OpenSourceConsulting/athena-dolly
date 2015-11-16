@@ -2,6 +2,7 @@ package com.athena.dolly.controller.web.datasource;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.athena.dolly.controller.DollyConstants;
 import com.athena.dolly.controller.ServiceResult;
 import com.athena.dolly.controller.ServiceResult.Status;
+import com.athena.dolly.controller.web.tomcat.instance.TomcatInstance;
 import com.mysql.jdbc.Connection;
 
 @Service
@@ -86,8 +88,8 @@ public class DatasourceService {
 		if (datasourcesByJdbc == null && datasourcesByName == null) {
 			return new ServiceResult(Status.FAILED, "Null");
 		}
-		return new ServiceResult(Status.DONE, "Done",
-				datasourcesByJdbc.addAll(datasourcesByName));
+		datasourcesByJdbc.addAll(datasourcesByName);
+		return new ServiceResult(Status.DONE, "Done", datasourcesByJdbc);
 	}
 
 	public ServiceResult edit(int id, String name, String dbType,
@@ -115,5 +117,22 @@ public class DatasourceService {
 			datasourceRepo.save(ds);
 			return new ServiceResult(Status.DONE, "Done");
 		}
+	}
+
+	public ServiceResult getAssociatedTomcatList(int dataSourceId) {
+		Datasource ds = datasourceRepo.findOne(dataSourceId);
+		if (ds != null) {
+			return new ServiceResult(Status.DONE, "", ds.getTomcatInstances());
+		}
+		return new ServiceResult(Status.FAILED, "");
+	}
+
+	public ServiceResult editAssoicateTomcatList(int dataSourceId,
+			List<Integer> removedAssociatedTomcatId) {
+		Datasource ds = datasourceRepo.findOne(dataSourceId);
+		if (ds != null) {
+			
+		}
+		return null;
 	}
 }
