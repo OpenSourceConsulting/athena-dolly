@@ -65,4 +65,31 @@ public class Domain implements Serializable {
 	public void setClustering(boolean isClustering) {
 		this.isClustering = isClustering;
 	}
+
+	public DatagridServerGroup getServerGroup() {
+		return serverGroup;
+	}
+
+	public void setServerGroup(DatagridServerGroup serverGroup) {
+		this.serverGroup = serverGroup;
+	}
+
+	public Collection<TomcatInstance> getTomcats() {
+		return tomcats;
+	}
+
+	public void setTomcats(Collection<TomcatInstance> tomcats) {
+		this.tomcats = tomcats;
+	}
+
+	/**
+	 * Constructor
+	 */
+	public Domain() {
+	}
+
+	public Domain(String name, boolean is_clustering) {
+		this.name  = name;
+		this.isClustering = is_clustering;
+	}
 }
