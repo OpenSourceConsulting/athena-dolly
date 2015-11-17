@@ -42,15 +42,16 @@ public class DatasourceService {
 		ds.setMinConnectionPool(minConnectionPool);
 		ds.setJdbcUrl(jdbcUrl);
 		datasourceRepo.save(ds);
-		return new ServiceResult(Status.DONE, "Not implemented yet", ds);
-	}
-
-	public ServiceResult edit(int datasource_id) {
-		return new ServiceResult(Status.DONE, "Not implemented yet");
+		return new ServiceResult(Status.DONE, "Done", ds);
 	}
 
 	public ServiceResult delete(int datasource_id) {
-		return new ServiceResult(Status.DONE, "Not implemented yet");
+		Datasource ds = datasourceRepo.findOne(datasource_id);
+		if (ds == null) {
+			return new ServiceResult(Status.FAILED, "Not exist");
+		}
+		datasourceRepo.delete(ds);
+		return new ServiceResult(Status.DONE, "Deleted", true);
 	}
 
 	public ServiceResult testConnection(String jdbcUrl, String userName,
@@ -119,20 +120,9 @@ public class DatasourceService {
 		}
 	}
 
-	public ServiceResult getAssociatedTomcatList(int dataSourceId) {
-		Datasource ds = datasourceRepo.findOne(dataSourceId);
-		if (ds != null) {
-			return new ServiceResult(Status.DONE, "", ds.getTomcatInstances());
-		}
-		return new ServiceResult(Status.FAILED, "");
-	}
+	public ServiceResult getAll() {
+		List<Datasource> list = datasourceRepo.findAll();
+		return new ServiceResult(Status.DONE, "Done", list);
 
-	public ServiceResult editAssoicateTomcatList(int dataSourceId,
-			List<Integer> removedAssociatedTomcatId) {
-		Datasource ds = datasourceRepo.findOne(dataSourceId);
-		if (ds != null) {
-			
-		}
-		return null;
 	}
 }
