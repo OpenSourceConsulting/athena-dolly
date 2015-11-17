@@ -30,6 +30,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.athena.dolly.controller.common.SSHManager;
@@ -115,4 +116,21 @@ public class TomcatInsanceController {
 		return res;
 	}
 
+	@RequestMapping(value = "/instance/start", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean startTomcat(int id) {
+		return service.start(id);
+	}
+
+	@RequestMapping(value = "/instance/restart", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean restartTomcat(int id) {
+		return service.restart(id);
+	}
+
+	@RequestMapping(value = "/instance/stop", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean stopTomcat(int id) {
+		return service.stop(id);
+	}
 }

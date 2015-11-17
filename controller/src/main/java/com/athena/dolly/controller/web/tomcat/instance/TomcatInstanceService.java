@@ -25,6 +25,7 @@
 package com.athena.dolly.controller.web.tomcat.instance;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,6 +45,8 @@ import com.athena.dolly.controller.common.SSHManager;
 import com.athena.dolly.controller.tomcat.instance.domain.ConfigFileVersion;
 import com.athena.dolly.controller.tomcat.instance.domain.ConfigFileVersionRepository;
 import com.athena.dolly.controller.tomcat.instance.domain.QConfigFileVersion;
+import com.athena.dolly.controller.web.datasource.Datasource;
+import com.athena.dolly.controller.web.datasource.DatasourceRepository;
 import com.mysema.query.jpa.impl.JPAQuery;
 
 /**
@@ -63,6 +66,9 @@ public class TomcatInstanceService {
 
 	@Autowired
 	private TomcatInstanceRepository repo;
+
+	@Autowired
+	private DatasourceRepository datasourceRepo;
 
 	@Autowired
 	private ConfigFileVersionRepository configRepo;
@@ -197,5 +203,56 @@ public class TomcatInstanceService {
 		// inst.setState(state);
 		// repo.save(inst);
 	}
+
+	/**
+	 * Start a tomcat instance
+	 * 
+	 * @param id
+	 * @return status of process. True for success
+	 */
+	public boolean start(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * Restart tomcat instance
+	 * 
+	 * @param id
+	 * @return status of process. True for success
+	 */
+	public boolean restart(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * Stop tomcat instance
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean stop(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ServiceResult getAssociatedTomcatList(int dataSourceId) {
+		Datasource ds = datasourceRepo.findOne(dataSourceId);
+		if (ds != null) {
+			return new ServiceResult(Status.DONE, "", ds.getTomcatInstances());
+		}
+		return new ServiceResult(Status.FAILED, "");
+	}
+
+	public ServiceResult editAssoicateTomcatList(int dataSourceId,
+			List<Integer> removedAssociatedTomcatId) {
+		Datasource ds = datasourceRepo.findOne(dataSourceId);
+		if (ds != null) {
+
+		}
+		return null;
+	}
+	
 
 }
