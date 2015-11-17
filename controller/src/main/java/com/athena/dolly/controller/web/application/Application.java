@@ -151,4 +151,18 @@ public class Application implements Serializable {
 	public void setSessions(Collection<Session> sessions) {
 		this.sessions = sessions;
 	}
+
+	/**
+	 * Constructor
+	 */
+	public Application() {
+	}
+
+	public Application(String name, String context_path, String war_path,
+			String version) {
+		displayName = name;
+		contextPath = context_path;
+		warPath = war_path;
+		this.version = version;
+	}
 }
