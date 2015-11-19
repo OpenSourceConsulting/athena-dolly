@@ -30,6 +30,154 @@ Ext.define('webapp.controller.MenuController', {
 
     },
 
+    onTreepanelItemContextMenu: function(dataview, record, item, index, e, eOpts) {
+        var menuId = record.get("menuId");
+
+        var mnuContext = null;
+
+        //Tomcat management level
+        if (menuId==="tomcatMng"){
+            mnuContext = new Ext.menu.Menu({
+
+            items: [{
+                id: 'new-domain',
+                text: 'New Domain'
+            },
+            {
+                id: 'collapse',
+                text: 'Collapse'
+            },
+            {
+                id: 'refresh',
+                text: 'Refresh'
+            }
+
+                   ],
+            listeners: {
+                itemclick: function(item) {
+                    switch (item.id) {
+                        case 'new-domain':
+                            alert("Add new domain");
+                            break;
+                        case 'collapse':
+                            alert("Collapse");
+                            break;
+                        case 'refresh':
+                            alert("Refresh");
+                            break;
+                    }
+                }
+                }
+        });
+        } else if (menuId.indexOf("tomcatMng_domain_") >= 0 && menuId.indexOf("_tomcat_") < 0) { //domain level
+            mnuContext = new Ext.menu.Menu({
+
+            items: [{
+                id: 'new-tomcat',
+                text: 'New Tomcat'
+            },
+            {
+                id: 'edit-domain',
+                text: 'Edit'
+            },
+            {
+                id: 'delete-domain',
+                text: 'Delete'
+            },
+            {
+                id:'expand',
+                text:'Expand'
+            },
+            {
+                id:'refresh',
+                text:'Refresh'
+            }
+
+                   ],
+            listeners: {
+                itemclick: function(item) {
+                    switch (item.id) {
+                        case 'new-tomcat':
+                            alert("Add new tomcat");
+                            break;
+                        case 'edit-domain':
+                            alert("Edit domain");
+                            break;
+                        case 'delete-domain':
+                            alert("Delete domain");
+                            break;
+                        case 'expand':
+                            alert("Expand");
+                            break;
+                        case 'refresh':
+                            alert("Refresh");
+                            break;
+                    }
+                }
+                }
+        });
+
+        }
+        else if (menuId.indexOf("tomcatMng_domain_") >= 0 && menuId.indexOf("_tomcat_") >= 0) { //tomcat level
+            mnuContext = new Ext.menu.Menu({
+
+            items: [{
+                id: 'start-tomcat',
+                text: 'Start'
+            },
+            {
+                id: 'stop-tomcat',
+                text: 'Stop'
+            },
+            {
+                id: 'edit-tomcat',
+                text: 'Edit'
+            },
+            {
+                id: 'delete-tomcat',
+                text: 'Delete'
+            },
+            {
+                id:'refresh',
+                text:'Refresh'
+            }
+
+                   ],
+            listeners: {
+                itemclick: function(item) {
+                    switch (item.id) {
+                        case 'start-tomcat':
+                            alert("Start tomcat");
+                            break;
+                        case 'stop-tomcat':
+                            alert("Stop tomcat");
+                            break;
+                        case 'edit-tomcat':
+                            alert("Edit tomcat");
+                            break;
+                        case 'delete-tomcat':
+                            alert("Delete tomcat");
+                            break;
+                        case 'refresh':
+                                alert("Refresh");
+                            break;
+                    }
+                }
+                }
+        });
+
+        }
+
+        e.stopEvent();
+        if (mnuContext !== null){
+            mnuContext.showAt(e.getXY());
+        }
+        else{
+            alert("No context menu");
+        }
+
+    },
+
     showMenu: function(menuId) {
         var activeItem = -1;
 
@@ -133,6 +281,9 @@ Ext.define('webapp.controller.MenuController', {
         this.control({
             "#menuTreePanel": {
                 itemclick: this.onTreepanelItemClick
+            },
+            "treepanel": {
+                itemcontextmenu: this.onTreepanelItemContextMenu
             }
         });
     }
