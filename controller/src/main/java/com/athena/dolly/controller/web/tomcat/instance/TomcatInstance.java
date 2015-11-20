@@ -29,6 +29,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -80,15 +81,17 @@ public class TomcatInstance implements Serializable {
 	@ManyToOne
 	// using this annotation to prevent Infinite recursion json mapping
 	@JsonBackReference
+	@JoinColumn(name = "domain_id")
 	private Domain domain;
 
-	@OneToMany
+	@OneToMany(mappedBy = "tomcat", fetch = FetchType.LAZY)
 	// using this annotation to prevent Infinite recursion json mapping
 	@JsonManagedReference
 	private Collection<Application> applications;
 
 	@JoinTable(name = "tomcat_datasource", joinColumns = { @JoinColumn(name = "tomcat_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "datasource_id", referencedColumnName = "id") })
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonManagedReference
 	private Collection<Datasource> datasources;
 
 	private int state;

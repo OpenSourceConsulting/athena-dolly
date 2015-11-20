@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -11,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 import com.athena.dolly.controller.web.tomcat.instance.TomcatInstance;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "data_source")
@@ -38,7 +41,8 @@ public class Datasource {
 	private String jdbcUrl;
 
 	@JoinTable(name = "tomcat_datasource", joinColumns = { @JoinColumn(name = "datasource_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "tomcat_id", referencedColumnName = "id") })
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private Collection<TomcatInstance> tomcatInstances;
 
 	public int getId() {

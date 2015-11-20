@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -50,6 +51,7 @@ public class Application implements Serializable {
 	@ManyToOne
 	// using this annotation to prevent Infinite recursion json mapping
 	@JsonBackReference
+	@JoinColumn(name="tomcat_id")
 	private TomcatInstance tomcat;
 
 	@OneToMany(mappedBy = "application")

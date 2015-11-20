@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -38,7 +40,7 @@ public class Domain implements Serializable {
 	@OneToOne
 	private DatagridServerGroup serverGroup;
 
-	@OneToMany(mappedBy = "domain")
+	@OneToMany(mappedBy = "domain",	fetch=FetchType.LAZY)
 	@JsonManagedReference
 	private Collection<TomcatInstance> tomcats;
 
