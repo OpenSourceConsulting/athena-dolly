@@ -37,7 +37,7 @@ Ext.define('webapp.controller.MenuController', {
 
         //Tomcat management level
         if (menuId==="tomcatMng"){
-            mnuContext = new Ext.menu.Menu({
+            mnuContext = Ext.create("Ext.menu.Menu",{
 
             items: [{
                 id: 'new-domain',
@@ -54,8 +54,8 @@ Ext.define('webapp.controller.MenuController', {
 
                    ],
             listeners: {
-                itemclick: function(item) {
-                    switch (item.id) {
+                click: function( _menu, _item, _e, _eOpts ) {
+                   switch (_item.id) {
                         case 'new-domain':
                             alert("Add new domain");
                             break;
@@ -65,12 +65,15 @@ Ext.define('webapp.controller.MenuController', {
                         case 'refresh':
                             alert("Refresh");
                             break;
-                    }
+                        default:
+                            alert("Default");
+                            break;
+                   }
                 }
                 }
         });
         } else if (menuId.indexOf("tomcatMng_domain_") >= 0 && menuId.indexOf("_tomcat_") < 0) { //domain level
-            mnuContext = new Ext.menu.Menu({
+            mnuContext =  Ext.create("Ext.menu.Menu",{
 
             items: [{
                 id: 'new-tomcat',
@@ -95,8 +98,8 @@ Ext.define('webapp.controller.MenuController', {
 
                    ],
             listeners: {
-                itemclick: function(item) {
-                    switch (item.id) {
+               click: function( _menu, _item, _e, _eOpts ) {
+                   switch (_item.id) {
                         case 'new-tomcat':
                             alert("Add new tomcat");
                             break;
@@ -119,7 +122,7 @@ Ext.define('webapp.controller.MenuController', {
 
         }
         else if (menuId.indexOf("tomcatMng_domain_") >= 0 && menuId.indexOf("_tomcat_") >= 0) { //tomcat level
-            mnuContext = new Ext.menu.Menu({
+            mnuContext =  Ext.create("Ext.menu.Menu",{
 
             items: [{
                 id: 'start-tomcat',
@@ -144,8 +147,8 @@ Ext.define('webapp.controller.MenuController', {
 
                    ],
             listeners: {
-                itemclick: function(item) {
-                    switch (item.id) {
+                click: function( _menu, _item, _e, _eOpts ) {
+                   switch (_item.id) {
                         case 'start-tomcat':
                             alert("Start tomcat");
                             break;
@@ -165,16 +168,13 @@ Ext.define('webapp.controller.MenuController', {
                 }
                 }
         });
-
         }
 
-        e.stopEvent();
         if (mnuContext !== null){
             mnuContext.showAt(e.getXY());
+            e.stopEvent();
         }
-        else{
-            alert("No context menu");
-        }
+
 
     },
 
