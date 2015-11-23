@@ -54,6 +54,7 @@ Ext.define('webapp.controller.MenuController', {
 
                    ],
             listeners: {
+
                 click: function( _menu, _item, _e, _eOpts ) {
                    switch (_item.id) {
                         case 'new-domain':
@@ -69,8 +70,14 @@ Ext.define('webapp.controller.MenuController', {
                             alert("Default");
                             break;
                    }
+                },
+                hide:function(menu){
+                    menu.destroy();
                 }
-                }
+            },
+            defaults: {
+               clickHideDelay: 1
+            }
         });
         } else if (menuId.indexOf("tomcatMng_domain_") >= 0 && menuId.indexOf("_tomcat_") < 0) { //domain level
             mnuContext =  Ext.create("Ext.menu.Menu",{
@@ -116,8 +123,14 @@ Ext.define('webapp.controller.MenuController', {
                             alert("Refresh");
                             break;
                     }
+                },
+                hide:function(menu){
+                    menu.destroy();
                 }
-                }
+           },
+           defaults: {
+             clickHideDelay: 1
+           }
         });
 
         }
@@ -165,16 +178,22 @@ Ext.define('webapp.controller.MenuController', {
                                 alert("Refresh");
                             break;
                     }
+                },
+                hide:function(menu){
+                    menu.destroy();
                 }
-                }
+           },
+           defaults: {
+             clickHideDelay: 1
+           }
         });
         }
 
         if (mnuContext !== null){
             mnuContext.showAt(e.getXY());
-            e.stopEvent();
-        }
 
+        }
+        e.stopEvent();
 
     },
 
