@@ -206,20 +206,9 @@ Ext.define('webapp.controller.MenuController', {
         }else if(menuId === "tomcatInsts"){
             activeItem = 1;
 
-        }else if(menuId === "dbcp"){
-            activeItem = 2;
-
-        }else if(menuId === "template"){
-            activeItem = 3;
-
-        }else if(menuId === "ssncluster"){
+        }else if (menuId === "usermnt"){
             activeItem = 4;
-
-        }else if(menuId === "apmDash"){
-            activeItem = 5;
-
-        }else if(menuId === "apmAnaly"){
-            activeItem = 6;
+            Ext.getStore("UserStore").load();
         }
 
         if(activeItem > -1){

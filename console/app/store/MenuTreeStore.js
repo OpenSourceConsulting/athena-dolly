@@ -90,7 +90,7 @@ Ext.define('webapp.store.MenuTreeStore', {
                     },
                     {
                         text: 'User Management',
-                        menuId: 'usermng',
+                        menuId: 'usermnt',
                         leaf: true
                     },
                     
