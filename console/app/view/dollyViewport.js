@@ -81,7 +81,7 @@ Ext.define('webapp.view.dollyViewport', {
                                     xtype: 'sessiondatapanel'
                                 },
                                 {
-                                    xtype: 'userMntContainer'
+                                    xtype: 'usermntcontainer'
                                 }
                             ]
                         },

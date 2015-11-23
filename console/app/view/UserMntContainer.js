@@ -17,8 +17,11 @@ Ext.define('webapp.view.UserMntContainer', {
     extend: 'Ext.container.Container',
     alias: 'widget.usermntcontainer',
 
-    height: 441,
-    width: 683,
+    height: 355,
+    width: 712,
+    layout: {
+        type: 'absolute'
+    },
 
     initComponent: function() {
         var me = this;
@@ -26,51 +29,40 @@ Ext.define('webapp.view.UserMntContainer', {
         Ext.applyIf(me, {
             items: [
                 {
-                    xtype: 'datefield',
-                    fieldLabel: 'Date'
-                },
-                {
                     xtype: 'gridpanel',
-                    height: 334,
-                    autoScroll: true,
                     title: 'User List',
-                    emptyText: 'No data available.',
-                    scroll: 'horizontal',
                     store: 'UserStore',
                     columns: [
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'username',
-                            text: 'User name'
+                            text: 'UserName'
                         },
                         {
-                            xtype: 'numbercolumn',
+                            xtype: 'gridcolumn',
+                            dataIndex: 'password',
+                            text: 'Pasword'
+                        },
+                        {
+                            xtype: 'gridcolumn',
                             dataIndex: 'email',
                             text: 'Email'
                         },
                         {
-                            xtype: 'datecolumn',
+                            xtype: 'gridcolumn',
                             dataIndex: 'full_name',
-                            text: 'Full name'
-                        },
-                        {
-                            xtype: 'booleancolumn',
-                            dataIndex: 'last_login_date',
-                            text: 'Last login date'
+                            text: 'Full Name'
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'created_date',
-                            text: 'Created date'
+                            text: 'Created Date'
                         },
                         {
-                            xtype: 'actioncolumn',
-                            dataIndex: 'id',
-                            items: [
-                                {
-
-                                }
-                            ]
+                            xtype: 'gridcolumn',
+                            width: 163,
+                            dataIndex: 'last_login_date',
+                            text: 'Last Login Date'
                         }
                     ],
                     dockedItems: [
@@ -87,8 +79,7 @@ Ext.define('webapp.view.UserMntContainer', {
                                 },
                                 {
                                     xtype: 'textfield',
-                                    fieldLabel: 'Filtering',
-                                    emptyText: 'Username'
+                                    fieldLabel: 'Filtering'
                                 }
                             ]
                         }
