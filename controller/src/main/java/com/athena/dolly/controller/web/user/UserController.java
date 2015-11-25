@@ -24,6 +24,9 @@
  */
 package com.athena.dolly.controller.web.user;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +34,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.athena.dolly.controller.ServiceResult;
+import com.athena.dolly.controller.web.common.model.ExtjsGridParam;
+import com.athena.dolly.controller.web.common.model.GridJsonResponse;
 import com.athena.dolly.controller.web.common.model.SimpleJsonResponse;
 
 /**
@@ -119,12 +126,20 @@ public class UserController {
 		return jsonRes;
 	}
 
-	@RequestMapping("/list")
-	public @ResponseBody
-	SimpleJsonResponse getList(SimpleJsonResponse jsonRes) {
-		jsonRes.setData(service.getList());
-		return jsonRes;
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@ResponseBody
+	public GridJsonResponse getUserList(ExtjsGridParam gridParam) {
+		GridJsonResponse res = new GridJsonResponse();
+		List<User2> users = service.getList();
+		res.setTotal((int) users.size());
+		res.setList(users);
+		return res;
 	}
 
+	@RequestMapping("rolelist")
+	@ResponseBody
+	public List<UserRole2> getRoleList() {
+		return service.getRoleList();
+	}
 }
 // end of UserController.java

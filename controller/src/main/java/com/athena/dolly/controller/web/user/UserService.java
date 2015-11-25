@@ -9,20 +9,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements InitializingBean {
-	
-	@Autowired
-	private IUserRepository repo;
 
-	public UserService() {
-		//repo = new UserRepository();
+	@Autowired
+	private UserRepository repo;
+
+	@Autowired
+	private UserRoleRepository roleRepo;
+
+	public List<User2> getList() {
+		return repo.findAll();
 	}
 
-	public List<User> getList() {
-		return repo.getList();
+	public List<UserRole2> getRoleList() {
+		return roleRepo.findAll();
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		System.err.println("\n\nrepo in UserService : " + repo);
 	}
+
 }
