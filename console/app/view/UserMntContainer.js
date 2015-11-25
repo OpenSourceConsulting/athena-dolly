@@ -18,7 +18,7 @@ Ext.define('webapp.view.UserMntContainer', {
     alias: 'widget.usermntcontainer',
 
     height: 355,
-    width: 712,
+    width: 1111,
     layout: {
         type: 'absolute'
     },
@@ -31,38 +31,48 @@ Ext.define('webapp.view.UserMntContainer', {
                 {
                     xtype: 'gridpanel',
                     title: 'User List',
+                    forceFit: true,
                     store: 'UserStore',
                     columns: [
                         {
                             xtype: 'gridcolumn',
-                            dataIndex: 'username',
+                            dataIndex: 'userName',
                             text: 'UserName'
                         },
                         {
                             xtype: 'gridcolumn',
+                            dataIndex: 'userRole.name',
+                            text: 'User Role'
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 186,
                             dataIndex: 'password',
                             text: 'Pasword'
                         },
                         {
                             xtype: 'gridcolumn',
+                            width: 208,
                             dataIndex: 'email',
                             text: 'Email'
                         },
                         {
                             xtype: 'gridcolumn',
-                            dataIndex: 'full_name',
+                            width: 156,
+                            dataIndex: 'fullName',
                             text: 'Full Name'
                         },
                         {
                             xtype: 'gridcolumn',
-                            dataIndex: 'created_date',
+                            width: 133,
+                            dataIndex: 'createdDateString',
                             text: 'Created Date'
                         },
                         {
                             xtype: 'gridcolumn',
-                            width: 163,
-                            dataIndex: 'last_login_date',
-                            text: 'Last Login Date'
+                            width: 133,
+                            dataIndex: 'lastLoginDateString',
+                            text: 'Last Login'
                         }
                     ],
                     dockedItems: [
@@ -82,13 +92,71 @@ Ext.define('webapp.view.UserMntContainer', {
                                     fieldLabel: 'Filtering'
                                 }
                             ]
+                        },
+                        {
+                            xtype: 'toolbar',
+                            dock: 'bottom',
+                            items: [
+                                {
+                                    xtype: 'pagingtoolbar',
+                                    width: 1099,
+                                    displayInfo: true,
+                                    store: 'UserStore'
+                                }
+                            ]
                         }
-                    ]
+                    ],
+                    listeners: {
+                        itemcontextmenu: {
+                            fn: me.onGridpanelItemContextMenu,
+                            scope: me
+                        }
+                    }
                 }
             ]
         });
 
         me.callParent(arguments);
+    },
+
+    onGridpanelItemContextMenu: function(dataview, record, item, index, e, eOpts) {
+        var mnuContext = Ext.create("Ext.menu.Menu",{
+
+            items: [{
+                id: 'edit-user',
+                text: 'Edit'
+            },
+            {
+                id: 'delete-user',
+                text: 'Delete'
+            }
+                   ],
+            listeners: {
+
+                click: function( _menu, _item, _e, _eOpts ) {
+                   switch (_item.id) {
+                        case 'edit-user':
+                            alert("Edit user");
+                            break;
+                        case 'delete-user':
+                            alert("Delete user");
+                            break;
+                        default:
+                            break;
+                   }
+                },
+                hide:function(menu){
+                    menu.destroy();
+                }
+            },
+            defaults: {
+               clickHideDelay: 1
+            }
+        });
+
+        mnuContext.showAt(e.getXY());
+        e.stopEvent();
+
     }
 
 });

@@ -23,7 +23,7 @@ Ext.define('webapp.model.UserModel', {
 
     fields: [
         {
-            name: 'username',
+            name: 'userName',
             type: 'string'
         },
         {
@@ -31,7 +31,7 @@ Ext.define('webapp.model.UserModel', {
             type: 'string'
         },
         {
-            name: 'full_name',
+            name: 'fullName',
             type: 'string'
         },
         {
@@ -39,12 +39,23 @@ Ext.define('webapp.model.UserModel', {
             type: 'string'
         },
         {
-            name: 'created_date',
-            type: 'date'
+            dateFormat: '',
+            dateWriteFormat: '',
+            name: 'createdDateString',
+            type: 'string'
         },
         {
-            name: 'last_login_date',
-            type: 'date'
+            dateFormat: 'Y-m-d',
+            name: 'lastLoginDateString',
+            sortType: 'asDate',
+            type: 'string'
+        },
+        {
+            name: 'id',
+            type: 'int'
+        },
+        {
+            name: 'userRole.name'
         }
     ]
 });
