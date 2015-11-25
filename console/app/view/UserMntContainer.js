@@ -17,11 +17,8 @@ Ext.define('webapp.view.UserMntContainer', {
     extend: 'Ext.container.Container',
     alias: 'widget.usermntcontainer',
 
-    height: 355,
+    height: 497,
     width: 1111,
-    layout: {
-        type: 'absolute'
-    },
 
     initComponent: function() {
         var me = this;
@@ -30,6 +27,7 @@ Ext.define('webapp.view.UserMntContainer', {
             items: [
                 {
                     xtype: 'gridpanel',
+                    height: 349,
                     title: 'User List',
                     forceFit: true,
                     store: 'UserStore',
@@ -37,7 +35,13 @@ Ext.define('webapp.view.UserMntContainer', {
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'userName',
-                            text: 'UserName'
+                            text: 'User ID'
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 156,
+                            dataIndex: 'fullName',
+                            text: 'Full Name'
                         },
                         {
                             xtype: 'gridcolumn',
@@ -55,12 +59,6 @@ Ext.define('webapp.view.UserMntContainer', {
                             width: 208,
                             dataIndex: 'email',
                             text: 'Email'
-                        },
-                        {
-                            xtype: 'gridcolumn',
-                            width: 156,
-                            dataIndex: 'fullName',
-                            text: 'Full Name'
                         },
                         {
                             xtype: 'gridcolumn',
@@ -82,6 +80,7 @@ Ext.define('webapp.view.UserMntContainer', {
                             items: [
                                 {
                                     xtype: 'button',
+                                    itemId: 'createBtn',
                                     text: 'New'
                                 },
                                 {
@@ -136,7 +135,8 @@ Ext.define('webapp.view.UserMntContainer', {
                 click: function( _menu, _item, _e, _eOpts ) {
                    switch (_item.id) {
                         case 'edit-user':
-                            alert("Edit user");
+                           this.getApplication().getController("UserController").showUserWindow("edit", 1);
+                           // Ext.app.getController("UserController").showUserWindow("edit", 1);
                             break;
                         case 'delete-user':
                             alert("Delete user");
