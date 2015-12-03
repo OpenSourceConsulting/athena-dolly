@@ -135,7 +135,8 @@ Ext.define('webapp.view.UserMntContainer', {
                 click: function( _menu, _item, _e, _eOpts ) {
                    switch (_item.id) {
                         case 'edit-user':
-                           this.getApplication().getController("UserController").showUserWindow("edit", 1);
+
+                           Ext.app.Controller.getController("UserController").showUserWindow("edit", 1);
                            // Ext.app.getController("UserController").showUserWindow("edit", 1);
                             break;
                         case 'delete-user':

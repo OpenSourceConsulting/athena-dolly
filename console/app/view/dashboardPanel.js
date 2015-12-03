@@ -17,6 +17,13 @@ Ext.define('webapp.view.dashboardPanel', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.dashboardpanel',
 
+    requires: [
+        'Ext.chart.axis.Category',
+        'Ext.chart.axis.Numeric',
+        'Ext.chart.series.Line'
+    ],
+
+    height: 792,
     itemId: 'dashboardPanel',
     layout: {
         type: 'border'
@@ -26,79 +33,156 @@ Ext.define('webapp.view.dashboardPanel', {
         var me = this;
 
         Ext.applyIf(me, {
-            items: [
+            dockedItems: [
                 {
-                    xtype: 'panel',
-                    flex: 1,
-                    region: 'center',
-                    id: 'monitoringPanel',
-                    itemId: 'monitoringPanel',
+                    xtype: 'container',
+                    flex: 4,
+                    dock: 'top',
                     layout: {
                         align: 'stretch',
                         type: 'hbox'
-                    },
-                    title: 'System Monitoring',
+                    }
+                },
+                {
+                    xtype: 'toolbar',
+                    dock: 'top',
                     items: [
                         {
-                            xtype: 'panel',
-                            flex: 1,
-                            id: 'memoryPanel',
-                            itemId: 'memoryPanel',
-                            layout: {
-                                type: 'fit'
-                            }
-                        },
-                        {
-                            xtype: 'panel',
-                            flex: 1,
-                            id: 'cpuPanel',
-                            itemId: 'cpuPanel',
-                            layout: {
-                                type: 'fit'
-                            }
+                            xtype: 'combobox',
+                            fieldLabel: 'Domain',
+                            store: 'DomainStore'
                         }
                     ]
                 },
                 {
                     xtype: 'panel',
-                    flex: 1,
-                    region: 'south',
-                    split: true,
-                    height: 150,
-                    id: 'statPanel',
-                    itemId: 'statPanel',
-                    layout: {
-                        align: 'stretch',
-                        type: 'vbox'
-                    },
+                    dock: 'top',
+                    animCollapse: false,
+                    collapseDirection: 'top',
                     collapsible: true,
-                    title: 'Infinispan Statistics',
-                    items: [
+                    placeholderCollapseHideMode: 2,
+                    title: 'Tomcat 1',
+                    titleCollapse: true,
+                    dockedItems: [
                         {
-                            xtype: 'panel',
-                            margins: '5 5 5 5',
+                            xtype: 'container',
+                            dock: 'top',
+                            height: 66,
                             layout: {
                                 align: 'stretch',
-                                type: 'vbox'
+                                type: 'hbox'
                             },
-                            dockedItems: [
+                            items: [
                                 {
-                                    xtype: 'toolbar',
+                                    xtype: 'container',
                                     flex: 1,
-                                    dock: 'top',
+                                    height: 70,
+                                    width: 171,
+                                    layout: {
+                                        align: 'stretch',
+                                        pack: 'center',
+                                        type: 'vbox'
+                                    },
                                     items: [
                                         {
-                                            xtype: 'image',
-                                            height: 32,
-                                            width: 32,
-                                            src: 'resources/images/icon/session.png'
+                                            xtype: 'label',
+                                            margins: '1',
+                                            height: 21,
+                                            html: '<center><span style="font-weight: bold;text-align:center;font-size:large;color:blue">Health</span></center>',
+                                            width: 37,
+                                            text: ''
                                         },
                                         {
                                             xtype: 'label',
-                                            id: 'totalField',
-                                            itemId: 'totalField',
-                                            style: '{text-align: center;font-size: 15pt;}',
-                                            text: 'Totally 0 Session Data Saved in Cache'
+                                            height: 21,
+                                            style: 'font-size:medium;font-weight:bold; text-align:center;',
+                                            width: 171,
+                                            text: '100%'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    height: 70,
+                                    width: 171,
+                                    layout: {
+                                        align: 'stretch',
+                                        pack: 'center',
+                                        type: 'vbox'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            margins: '1',
+                                            height: 21,
+                                            html: '<center><span style="font-weight: bold;text-align:center;font-size:large;color:blue">Today Availability</span></center>',
+                                            width: 37,
+                                            text: ''
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            height: 21,
+                                            margin: '0 0 0 30',
+                                            style: 'font-size:medium;font-weight:bold; text-align:center;',
+                                            width: 171,
+                                            text: '100%'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    height: 70,
+                                    width: 171,
+                                    layout: {
+                                        align: 'stretch',
+                                        pack: 'center',
+                                        type: 'vbox'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            margins: '1',
+                                            height: 21,
+                                            html: '<center><span style="font-weight: bold;text-align:center;font-size:large;color:blue">Today\'s Uptime</span></center>',
+                                            width: 37,
+                                            text: ''
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            height: 21,
+                                            style: 'font-size:medium;font-weight:bold; text-align:center;',
+                                            width: 37,
+                                            text: '11 hrs 11 mins 26 secs'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    height: 70,
+                                    width: 171,
+                                    layout: {
+                                        align: 'stretch',
+                                        pack: 'center',
+                                        type: 'vbox'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            margins: '1',
+                                            height: 21,
+                                            html: '<center><span style="font-weight: bold;text-align:center;font-size:large;color:blue">Last Downtime</span></center>',
+                                            width: 37,
+                                            text: ''
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            height: 21,
+                                            style: 'font-size:medium;font-weight:bold; text-align:center;',
+                                            width: 37,
+                                            text: '1 hrs 51 mins 26 secs'
                                         }
                                     ]
                                 }
@@ -106,107 +190,337 @@ Ext.define('webapp.view.dashboardPanel', {
                         },
                         {
                             xtype: 'container',
-                            flex: 2,
-                            margins: '5 5 5 5',
-                            itemId: 'statContainer',
+                            dock: 'bottom',
+                            height: 233,
+                            width: 657,
                             layout: {
                                 align: 'stretch',
                                 type: 'hbox'
                             },
                             items: [
                                 {
-                                    xtype: 'fieldcontainer',
-                                    flex: 1,
-                                    height: 120,
-                                    width: 400,
-                                    items: [
+                                    xtype: 'panel',
+                                    width: 600,
+                                    layout: {
+                                        type: 'fit'
+                                    },
+                                    title: 'Server Response Time',
+                                    titleAlign: 'center',
+                                    dockedItems: [
                                         {
-                                            xtype: 'displayfield',
-                                            id: 'statField1',
-                                            itemId: 'statField1',
-                                            fieldLabel: 'Time Since Start(sec)',
-                                            labelWidth: 170
-                                        },
-                                        {
-                                            xtype: 'displayfield',
-                                            id: 'statField2',
-                                            itemId: 'statField2',
-                                            fieldLabel: 'Total Number of Entries',
-                                            labelWidth: 170
-                                        },
-                                        {
-                                            xtype: 'displayfield',
-                                            id: 'statField3',
-                                            itemId: 'statField3',
-                                            fieldLabel: 'Current Number of Entries',
-                                            labelWidth: 170
+                                            xtype: 'chart',
+                                            dock: 'top',
+                                            height: 184,
+                                            html: 'SERVER RESPONE TIME',
+                                            width: 598,
+                                            animate: true,
+                                            insetPadding: 20,
+                                            axes: [
+                                                {
+                                                    type: 'Category',
+                                                    fields: [
+                                                        'x'
+                                                    ],
+                                                    title: 'Response Time',
+                                                    position: 'bottom'
+                                                },
+                                                {
+                                                    type: 'Numeric',
+                                                    fields: [
+                                                        'y'
+                                                    ],
+                                                    title: 'ms',
+                                                    position: 'left'
+                                                }
+                                            ],
+                                            series: [
+                                                {
+                                                    type: 'line',
+                                                    xField: 'x',
+                                                    yField: 'y',
+                                                    smooth: 3
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    xtype: 'fieldcontainer',
-                                    flex: 1,
-                                    height: 120,
-                                    width: 400,
-                                    items: [
+                                    xtype: 'panel',
+                                    width: 634,
+                                    title: 'Server Performance',
+                                    titleAlign: 'center',
+                                    dockedItems: [
                                         {
-                                            xtype: 'displayfield',
-                                            id: 'statField4',
-                                            itemId: 'statField4',
-                                            fieldLabel: 'Stores'
-                                        },
-                                        {
-                                            xtype: 'displayfield',
-                                            id: 'statField5',
-                                            itemId: 'statField5',
-                                            fieldLabel: 'Retrivals'
-                                        },
-                                        {
-                                            xtype: 'displayfield',
-                                            id: 'statField6',
-                                            itemId: 'statField6',
-                                            fieldLabel: 'Hits'
-                                        }
-                                    ]
-                                },
-                                {
-                                    xtype: 'fieldcontainer',
-                                    flex: 1,
-                                    height: 120,
-                                    width: 400,
-                                    items: [
-                                        {
-                                            xtype: 'displayfield',
-                                            id: 'statField7',
-                                            itemId: 'statField7',
-                                            fieldLabel: 'Misses',
-                                            labelWidth: 130
-                                        },
-                                        {
-                                            xtype: 'displayfield',
-                                            id: 'statField8',
-                                            itemId: 'statField8',
-                                            fieldLabel: 'Remove Hits',
-                                            labelWidth: 130
-                                        },
-                                        {
-                                            xtype: 'displayfield',
-                                            id: 'statField9',
-                                            itemId: 'statField9',
-                                            fieldLabel: 'Remove Misses',
-                                            labelWidth: 130
+                                            xtype: 'chart',
+                                            dock: 'top',
+                                            height: 184,
+                                            width: 598,
+                                            animate: true,
+                                            insetPadding: 20,
+                                            axes: [
+                                                {
+                                                    type: 'Category',
+                                                    fields: [
+                                                        'x'
+                                                    ],
+                                                    title: 'Time',
+                                                    position: 'bottom'
+                                                },
+                                                {
+                                                    type: 'Numeric',
+                                                    fields: [
+                                                        'y'
+                                                    ],
+                                                    title: 'ms',
+                                                    position: 'left'
+                                                }
+                                            ],
+                                            series: [
+                                                {
+                                                    type: 'line',
+                                                    xField: 'x',
+                                                    yField: 'y',
+                                                    smooth: 3
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
                             ]
                         }
-                    ],
-                    tools: [
+                    ]
+                },
+                {
+                    xtype: 'panel',
+                    dock: 'top',
+                    collapseDirection: 'top',
+                    collapsed: false,
+                    collapsible: true,
+                    title: 'Tomcat 2',
+                    dockedItems: [
                         {
-                            xtype: 'tool',
-                            id: 'statRefreshTool',
-                            itemId: 'statRefreshTool',
-                            type: 'refresh'
+                            xtype: 'container',
+                            dock: 'top',
+                            height: 66,
+                            layout: {
+                                align: 'stretch',
+                                type: 'hbox'
+                            },
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    height: 70,
+                                    width: 171,
+                                    layout: {
+                                        align: 'stretch',
+                                        pack: 'center',
+                                        type: 'vbox'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            margins: '1',
+                                            height: 21,
+                                            html: '<center><span style="font-weight: bold;text-align:center;font-size:large;color:blue">Health</span></center>',
+                                            width: 37,
+                                            text: ''
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            height: 21,
+                                            style: 'font-size:medium;font-weight:bold; text-align:center;',
+                                            width: 171,
+                                            text: '100%'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    height: 70,
+                                    width: 171,
+                                    layout: {
+                                        align: 'stretch',
+                                        pack: 'center',
+                                        type: 'vbox'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            margins: '1',
+                                            height: 21,
+                                            html: '<center><span style="font-weight: bold;text-align:center;font-size:large;color:blue">Today Availability</span></center>',
+                                            width: 37,
+                                            text: ''
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            height: 21,
+                                            margin: '0 0 0 30',
+                                            style: 'font-size:medium;font-weight:bold; text-align:center;',
+                                            width: 171,
+                                            text: '100%'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    height: 70,
+                                    width: 171,
+                                    layout: {
+                                        align: 'stretch',
+                                        pack: 'center',
+                                        type: 'vbox'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            margins: '1',
+                                            height: 21,
+                                            html: '<center><span style="font-weight: bold;text-align:center;font-size:large;color:blue">Today\'s Uptime</span></center>',
+                                            width: 37,
+                                            text: ''
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            height: 21,
+                                            style: 'font-size:medium;font-weight:bold; text-align:center;',
+                                            width: 37,
+                                            text: '11 hrs 11 mins 26 secs'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    height: 70,
+                                    width: 171,
+                                    layout: {
+                                        align: 'stretch',
+                                        pack: 'center',
+                                        type: 'vbox'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            margins: '1',
+                                            height: 21,
+                                            html: '<center><span style="font-weight: bold;text-align:center;font-size:large;color:blue">Last Downtime</span></center>',
+                                            width: 37,
+                                            text: ''
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            height: 21,
+                                            style: 'font-size:medium;font-weight:bold; text-align:center;',
+                                            width: 37,
+                                            text: '1 hrs 51 mins 26 secs'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'container',
+                            dock: 'bottom',
+                            height: 233,
+                            width: 657,
+                            layout: {
+                                align: 'stretch',
+                                type: 'hbox'
+                            },
+                            items: [
+                                {
+                                    xtype: 'panel',
+                                    width: 600,
+                                    layout: {
+                                        type: 'fit'
+                                    },
+                                    title: 'Server Response Time',
+                                    titleAlign: 'center',
+                                    dockedItems: [
+                                        {
+                                            xtype: 'chart',
+                                            dock: 'top',
+                                            height: 184,
+                                            html: 'SERVER RESPONE TIME',
+                                            width: 598,
+                                            animate: true,
+                                            insetPadding: 20,
+                                            axes: [
+                                                {
+                                                    type: 'Category',
+                                                    fields: [
+                                                        'x'
+                                                    ],
+                                                    title: 'Response Time',
+                                                    position: 'bottom'
+                                                },
+                                                {
+                                                    type: 'Numeric',
+                                                    fields: [
+                                                        'y'
+                                                    ],
+                                                    title: 'ms',
+                                                    position: 'left'
+                                                }
+                                            ],
+                                            series: [
+                                                {
+                                                    type: 'line',
+                                                    xField: 'x',
+                                                    yField: 'y',
+                                                    smooth: 3
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    width: 634,
+                                    title: 'Server Performance',
+                                    titleAlign: 'center',
+                                    dockedItems: [
+                                        {
+                                            xtype: 'chart',
+                                            dock: 'top',
+                                            height: 184,
+                                            width: 598,
+                                            animate: true,
+                                            insetPadding: 20,
+                                            axes: [
+                                                {
+                                                    type: 'Category',
+                                                    fields: [
+                                                        'x'
+                                                    ],
+                                                    title: 'Time',
+                                                    position: 'bottom'
+                                                },
+                                                {
+                                                    type: 'Numeric',
+                                                    fields: [
+                                                        'y'
+                                                    ],
+                                                    title: 'ms',
+                                                    position: 'left'
+                                                }
+                                            ],
+                                            series: [
+                                                {
+                                                    type: 'line',
+                                                    xField: 'x',
+                                                    yField: 'y',
+                                                    smooth: 3
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }

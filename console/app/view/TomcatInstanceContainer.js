@@ -15,7 +15,6 @@
 
 Ext.define('webapp.view.TomcatInstanceContainer', {
     extend: 'Ext.container.Container',
-    alias: 'widget.TomcatInstanceContainer',
 
     layout: {
         type: 'border'
@@ -27,48 +26,76 @@ Ext.define('webapp.view.TomcatInstanceContainer', {
         Ext.applyIf(me, {
             items: [
                 {
-                    xtype: 'gridpanel',
-                    region: 'center',
-                    id: 'tomcatInstGrid',
-                    itemId: 'tomcatInstGrid',
-                    title: 'Tomcat Instances',
-                    forceFit: true,
-                    store: 'TomcatInstanceListStore',
-                    columns: [
+                    xtype: 'container',
+                    flex: 0.5,
+                    region: 'north',
+                    height: 47,
+                    items: [
                         {
-                            xtype: 'gridcolumn',
-                            width: 30,
-                            dataIndex: 'id',
-                            text: 'ID'
+                            xtype: 'label',
+                            text: 'Tomcat Management > Domain 1> Tomcat 1'
+                        }
+                    ]
+                },
+                {
+                    xtype: 'panel',
+                    flex: 1.5,
+                    region: 'north',
+                    height: 389,
+                    layout: {
+                        align: 'stretch',
+                        type: 'hbox'
+                    },
+                    manageHeight: false,
+                    title: 'Overview',
+                    items: [
+                        {
+                            xtype: 'displayfield',
+                            width: 164,
+                            fieldLabel: 'Host name:',
+                            value: 'Display Field'
                         },
                         {
-                            xtype: 'gridcolumn',
-                            dataIndex: 'instanceName',
-                            text: 'Instance Name'
+                            xtype: 'displayfield',
+                            width: 249,
+                            fieldLabel: 'Status',
+                            value: 'Display Field'
                         },
                         {
-                            xtype: 'gridcolumn',
-                            width: 70,
-                            dataIndex: 'ipAddr',
-                            text: 'IP Address'
+                            xtype: 'displayfield',
+                            width: 249,
+                            fieldLabel: 'IP Address',
+                            value: 'Display Field'
                         },
                         {
-                            xtype: 'gridcolumn',
-                            width: 70,
-                            dataIndex: 'httpPort',
-                            text: 'HTTP Port'
+                            xtype: 'displayfield',
+                            width: 249,
+                            fieldLabel: 'Ports:',
+                            value: 'Display Field'
                         },
                         {
-                            xtype: 'gridcolumn',
-                            width: 60,
-                            dataIndex: 'applications',
-                            text: 'Applications'
+                            xtype: 'displayfield',
+                            width: 164,
+                            fieldLabel: 'Web server',
+                            value: 'Display Field'
                         },
                         {
-                            xtype: 'gridcolumn',
-                            width: 40,
-                            dataIndex: 'state',
-                            text: '상태'
+                            xtype: 'displayfield',
+                            width: 164,
+                            fieldLabel: 'JVM Version',
+                            value: 'Display Field'
+                        },
+                        {
+                            xtype: 'displayfield',
+                            width: 164,
+                            fieldLabel: 'OS Name',
+                            value: 'Display Field'
+                        },
+                        {
+                            xtype: 'displayfield',
+                            width: 164,
+                            fieldLabel: 'Domain',
+                            value: 'Display Field'
                         }
                     ],
                     dockedItems: [
@@ -78,90 +105,75 @@ Ext.define('webapp.view.TomcatInstanceContainer', {
                             items: [
                                 {
                                     xtype: 'button',
-                                    handler: function(button, e) {
-                                        var formWindow = Ext.create("widget.TomcatInstanceFormWindow");
-                                        formWindow.show();
-                                    },
-                                    id: 'createTomcatInstBtn',
-                                    text: '등록'
+                                    disabled: true,
+                                    text: 'Start'
                                 },
                                 {
-                                    xtype: 'splitbutton',
-                                    text: 'Actions',
-                                    menu: {
-                                        xtype: 'menu',
-                                        id: 'InstActionMenu',
-                                        itemId: 'InstActionMenu',
-                                        items: [
-                                            {
-                                                xtype: 'menuitem',
-                                                id: 'startInst',
-                                                itemId: 'startInst',
-                                                text: 'Start'
-                                            },
-                                            {
-                                                xtype: 'menuitem',
-                                                id: 'stopInst',
-                                                itemId: 'stopInst',
-                                                text: 'Stop'
-                                            },
-                                            {
-                                                xtype: 'menuitem',
-                                                id: 'deleteInst',
-                                                itemId: 'deleteInst',
-                                                text: 'Delete'
-                                            }
-                                        ]
-                                    }
+                                    xtype: 'button',
+                                    text: 'Stop'
                                 },
                                 {
-                                    xtype: 'tbseparator'
-                                },
-                                {
-                                    xtype: 'textfield',
-                                    id: 'searchInstanceName',
-                                    itemId: 'searchInstanceName',
-                                    fieldLabel: 'Filtering',
-                                    labelWidth: 60,
-                                    name: 'searchInstanceName',
-                                    emptyText: 'Instance Name'
+                                    xtype: 'button',
+                                    text: 'Restart'
                                 }
                             ]
-                        },
-                        {
-                            xtype: 'pagingtoolbar',
-                            dock: 'bottom',
-                            width: 360,
-                            displayInfo: true,
-                            store: 'TomcatInstanceListStore'
                         }
                     ]
                 },
                 {
-                    xtype: 'tabpanel',
-                    flex: 1,
-                    region: 'south',
-                    split: true,
-                    height: 150,
-                    id: 'tomcatInstTabPanel',
-                    itemId: 'tomcatInstTabPanel',
-                    activeTab: 0,
-                    items: [
+                    xtype: 'gridpanel',
+                    flex: 8,
+                    region: 'center',
+                    title: 'Data sources',
+                    forceFit: true,
+                    columns: [
                         {
-                            xtype: 'panel',
-                            title: '구성정보'
+                            xtype: 'gridcolumn',
+                            dataIndex: 'string',
+                            text: 'Name'
                         },
                         {
-                            xtype: 'panel',
-                            title: 'env.sh'
+                            xtype: 'numbercolumn',
+                            dataIndex: 'number',
+                            text: 'JDBC URL'
                         },
                         {
-                            xtype: 'panel',
-                            title: 'server.xml'
+                            xtype: 'datecolumn',
+                            dataIndex: 'date',
+                            text: 'Servers'
                         },
                         {
-                            xtype: 'panel',
-                            title: 'context.xml'
+                            xtype: 'booleancolumn',
+                            dataIndex: 'bool',
+                            text: 'Min Connection Pool'
+                        },
+                        {
+                            xtype: 'booleancolumn',
+                            dataIndex: 'bool',
+                            text: 'Max Connection Pool'
+                        },
+                        {
+                            xtype: 'booleancolumn',
+                            dataIndex: 'bool',
+                            text: 'Timeout'
+                        }
+                    ],
+                    dockedItems: [
+                        {
+                            xtype: 'pagingtoolbar',
+                            dock: 'bottom',
+                            width: 360,
+                            displayInfo: true
+                        },
+                        {
+                            xtype: 'toolbar',
+                            dock: 'top',
+                            items: [
+                                {
+                                    xtype: 'button',
+                                    text: 'Link new Data source'
+                                }
+                            ]
                         }
                     ]
                 }

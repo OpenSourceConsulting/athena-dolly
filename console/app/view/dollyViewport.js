@@ -19,9 +19,6 @@ Ext.define('webapp.view.dollyViewport', {
 
     requires: [
         'webapp.view.dashboardPanel',
-        'webapp.view.TomcatInstanceContainer',
-        'webapp.view.TomcatDatasourceContainer',
-        'webapp.view.sessionDataPanel',
         'webapp.view.UserMntContainer',
         'Ext.layout.container.Border',
         'Ext.layout.container.Card',
@@ -70,15 +67,6 @@ Ext.define('webapp.view.dollyViewport', {
                             items: [
                                 {
                                     xtype: 'dashboardpanel'
-                                },
-                                {
-                                    xtype: 'TomcatInstanceContainer'
-                                },
-                                {
-                                    xtype: 'TomcatDatasourceContainer'
-                                },
-                                {
-                                    xtype: 'sessiondatapanel'
                                 },
                                 {
                                     xtype: 'usermntcontainer'
