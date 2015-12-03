@@ -32,8 +32,7 @@ Ext.define('webapp.store.TomcatInstanceListStore', {
                 type: 'ajax',
                 url: 'tomcat/instance/list',
                 reader: {
-                    type: 'json',
-                    root: 'list'
+                    type: 'json'
                 }
             }
         }, cfg)]);

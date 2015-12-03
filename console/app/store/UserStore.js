@@ -32,8 +32,7 @@ Ext.define('webapp.store.UserStore', {
                 type: 'ajax',
                 url: '/user/list',
                 reader: {
-                    type: 'json',
-                    root: 'list'
+                    type: 'json'
                 }
             }
         }, cfg)]);
