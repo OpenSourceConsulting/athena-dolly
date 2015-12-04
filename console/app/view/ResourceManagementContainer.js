@@ -15,6 +15,7 @@
 
 Ext.define('webapp.view.ResourceManagementContainer', {
     extend: 'Ext.container.Container',
+    alias: 'widget.resourcemanagementcontainer',
 
     layout: {
         align: 'stretch',

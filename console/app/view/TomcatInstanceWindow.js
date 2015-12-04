@@ -31,8 +31,8 @@ Ext.define('webapp.view.TomcatInstanceWindow', {
             dockedItems: [
                 {
                     xtype: 'container',
-                    dock: 'top',
                     flex: 1,
+                    dock: 'top',
                     margin: '10 0 10 10',
                     items: [
                         {
@@ -59,8 +59,8 @@ Ext.define('webapp.view.TomcatInstanceWindow', {
                 },
                 {
                     xtype: 'gridpanel',
-                    dock: 'top',
                     flex: 1,
+                    dock: 'top',
                     title: 'Data source',
                     forceFit: true,
                     columns: [
@@ -88,8 +88,8 @@ Ext.define('webapp.view.TomcatInstanceWindow', {
                 },
                 {
                     xtype: 'checkboxfield',
-                    dock: 'top',
                     flex: 0.5,
+                    dock: 'top',
                     fieldLabel: '',
                     boxLabel: 'Automatically start tomcat after being created'
                 },

@@ -15,6 +15,7 @@
 
 Ext.define('webapp.view.MonitoringTomcatInstance', {
     extend: 'Ext.container.Container',
+    alias: 'widget.monitoringtomcatinstance',
 
     requires: [
         'Ext.chart.axis.Category',

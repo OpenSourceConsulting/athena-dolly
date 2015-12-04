@@ -15,6 +15,7 @@
 
 Ext.define('webapp.view.DomainContainer', {
     extend: 'Ext.container.Container',
+    alias: 'widget.domaincontainer',
 
     layout: {
         type: 'border'

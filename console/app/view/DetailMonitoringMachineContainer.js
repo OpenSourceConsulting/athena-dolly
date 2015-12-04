@@ -15,6 +15,7 @@
 
 Ext.define('webapp.view.DetailMonitoringMachineContainer', {
     extend: 'Ext.container.Container',
+    alias: 'widget.detailmonitoringmachinecontainer',
 
     requires: [
         'Ext.chart.axis.Gauge',

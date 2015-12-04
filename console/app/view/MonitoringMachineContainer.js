@@ -15,6 +15,7 @@
 
 Ext.define('webapp.view.MonitoringMachineContainer', {
     extend: 'Ext.container.Container',
+    alias: 'widget.monitoringmachinecontainer',
 
     requires: [
         'Ext.chart.axis.Category',

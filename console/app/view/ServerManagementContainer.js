@@ -15,6 +15,7 @@
 
 Ext.define('webapp.view.ServerManagementContainer', {
     extend: 'Ext.container.Container',
+    alias: 'widget.servermanagementcontainer',
 
     layout: {
         align: 'stretch',

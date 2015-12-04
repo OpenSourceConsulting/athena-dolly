@@ -15,6 +15,7 @@
 
 Ext.define('webapp.view.TomcatInstanceContainer', {
     extend: 'Ext.container.Container',
+    alias: 'widget.tomcatinstancecontainer',
 
     layout: {
         type: 'border'

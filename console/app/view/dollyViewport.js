@@ -20,6 +20,14 @@ Ext.define('webapp.view.dollyViewport', {
     requires: [
         'webapp.view.dashboardPanel',
         'webapp.view.UserMntContainer',
+        'webapp.view.DomainContainer',
+        'webapp.view.TomcatInstanceContainer',
+        'webapp.view.MonitoringMachineContainer',
+        'webapp.view.MonitoringTomcatInstance',
+        'webapp.view.DetailMonitoringMachineContainer',
+        'webapp.view.DetailMonitoringTomcatInstance',
+        'webapp.view.ServerManagementContainer',
+        'webapp.view.ResourceManagementContainer',
         'Ext.layout.container.Border',
         'Ext.layout.container.Card',
         'Ext.ux.GMapPanel',
@@ -58,6 +66,7 @@ Ext.define('webapp.view.dollyViewport', {
                         {
                             xtype: 'container',
                             region: 'center',
+                            activeItem: 2,
                             frame: false,
                             id: 'centerContainer',
                             itemId: 'centerContainer',
@@ -70,6 +79,30 @@ Ext.define('webapp.view.dollyViewport', {
                                 },
                                 {
                                     xtype: 'usermntcontainer'
+                                },
+                                {
+                                    xtype: 'domaincontainer'
+                                },
+                                {
+                                    xtype: 'tomcatinstancecontainer'
+                                },
+                                {
+                                    xtype: 'monitoringmachinecontainer'
+                                },
+                                {
+                                    xtype: 'monitoringtomcatinstance'
+                                },
+                                {
+                                    xtype: 'detailmonitoringmachinecontainer'
+                                },
+                                {
+                                    xtype: 'detailmonitoringtomcatinstance'
+                                },
+                                {
+                                    xtype: 'servermanagementcontainer'
+                                },
+                                {
+                                    xtype: 'resourcemanagementcontainer'
                                 }
                             ]
                         },
