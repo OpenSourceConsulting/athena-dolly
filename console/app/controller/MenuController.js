@@ -202,13 +202,26 @@ Ext.define('webapp.controller.MenuController', {
 
         if(menuId === "dashboard"){
             activeItem = 0;
-
-        }else if(menuId === "tomcatInsts"){
-            activeItem = 1;
-
         }else if (menuId === "usermnt"){
-            activeItem = 4;
+            activeItem = 1;
             Ext.getStore("UserStore").load();
+        }else if (menuId === "tomcatMng_domain_" && menuId.indexOf("_tomcat_") < 0) {
+            activeItem = 2;
+        }else if (menuId === "tomcatMng_domain_" && menuId.indexOf("_tomcat_") >= 0) {
+            activeItem = 3;
+        }else if (menuId === "monitoring_servers" && menuId.indexOf("_server_") < 0) {
+            activeItem = 4;
+
+        }else if (menuId === "monitoring_tomcats" && menuId.indexOf("_tomcat_") < 0) {
+            activeItem = 5;
+        }else if (menuId === "monitoring_servers" && menuId.indexOf("_server_") >= 0) {
+            activeItem = 6;
+        }else if (menuId === "monitoring_tomcats" && menuId.indexOf("_tomcat_") >= 0) {
+            activeItem = 7;
+        }else if (menuId === "resourcemng_servers") {
+            activeItem = 8;
+        }else if (menuId === "resourcemng_datasources") {
+            activeItem = 9;
         }
 
         if(activeItem > -1){
